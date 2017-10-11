@@ -48,6 +48,10 @@ Perform actions such as like, remix or "send to kit" on the `kwc-share-card`.
             .active .icon-container .icon {
                 fill: var(--kwc-share-action-icon-color);
             }
+            .active .icon,
+            .active .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-color);
+            }
 
             /*HOVER STATE*/
             .wrapper:hover .icon,
