@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`kwc-share-card`
+Display a creation made with Kano Code.
+
+@demo demo/index.html
+-->
+
+<dom-module id="kwc-share-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'kwc-share-card',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'kwc-share-card',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
