@@ -1,0 +1,121 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../web-components/kano-icons/kano-icons.html">
+<link rel="import" href="../kwc-style/kwc-style.html">
+
+<!--
+`kwc-share-action`
+Perform actions such as like, remix or "send to kit" on the `kwc-share-card`.
+
+@demo demo/index.html
+-->
+
+<dom-module id="kwc-share-action">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+                cursor: pointer;
+                font-size: 14px;
+                line-height: 14px;
+                font-weight: bold;
+                margin-right: 24px;
+            }
+
+            /*DEFAULT STATE*/
+            .label-container {
+                color: var(--color-grey);
+            }
+            .icon-container .icon {
+                fill: var(--color-grey);
+            }
+            .icon-container,
+            .label-container {
+                display: inline-block;
+            }
+            .icon,
+            .label-container ::slotted(.icon) {
+                width: 16px;
+                height: 16px;
+                margin-right: 4px;
+                margin-top: -4px;
+            }
+
+            /*ACTIVE STATE*/
+            .active .label-container {
+                color: var(--color-black);
+            }
+            .active .icon-container .icon {
+                fill: var(--kwc-share-action-icon-color);
+            }
+
+            /*HOVER STATE*/
+            .wrapper:hover .icon,
+            .wrapper:hover .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-color);
+            }
+            .wrapper:hover .label-container {
+                color: var(--color-black);
+            }
+        </style>
+        <div class$="wrapper [[_activeClass]]">
+            <div class="icon-container">
+                <template is="dom-if" if="[[_hasIcon]]">
+                    <template is="dom-if" if="[[active]]">
+                        <iron-icon class="icon" icon="kano-icons:[[iconId]]"></iron-icon>
+                    </template>
+                    <template is="dom-if" if="[[!active]]">
+                        <iron-icon class="icon" icon="kano-icons:[[iconId]]"></iron-icon>
+                    </template>
+                </template>
+            </div>
+            <div class="label-container">
+                <slot></slot>
+            </div>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'kwc-share-action',
+        properties: {
+            iconId: {
+                type: String,
+                value: null
+            },
+            action: {
+                type: String,
+                value: null
+            },
+            active: {
+                type: Boolean,
+                value: false
+            },
+            color: {
+                type: String,
+                value: 'grey'
+            },
+            _hasIcon: {
+                type: String,
+                computed: '_computeHasIcon(iconId)'
+            },
+            _activeClass: {
+                type: String,
+                computed: '_computeActiveClass(active)'
+            }
+        },
+        listeners: {
+            'tap': '_onTap'
+        },
+        _computeHasIcon (iconId) {
+            return iconId ? true : false;
+        },
+        _computeActiveClass (active) {
+            return active ? 'active' : 'inactive';
+        },
+        _onTap (e) {
+            this.fire('action-tapped', this.action);
+        }
+    });
+    </script>
+</dom-module>

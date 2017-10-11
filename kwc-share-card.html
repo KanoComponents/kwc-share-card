@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../kwc-style/kwc-style.html">
 
 <!--
 `kwc-share-card`
@@ -8,27 +9,111 @@ Display a creation made with Kano Code.
 -->
 
 <dom-module id="kwc-share-card">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]!</h2>
-  </template>
+    <template>
+        <style>
+            :host {
+                display: block;
+                max-width: 256px;
+                font-family: var(--font-body);
+            }
+            :host *[hidden] {
+                display: none !important;
+            }
+            .wrapper {
+            }
+            .cover {
+                position: relative;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .cover .avatar {
+                position: absolute;
+                bottom: -10px;
+                left: 10px;
+                height: 40px;
+                width: 40px;
+                border-radius: 100%;
+                border: 4px solid white;
+                cursor: pointer;
+            }
+            .cover .staff-picked-badge {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                height: 32px;
+                width: 32px;
+            }
+            .title {
+                cursor: pointer;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 20px;
+                margin: 0 0 6px 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 100%;
 
-  <script>
+                height: 28px;
+            }
+            .title .title-text {
+                height: 20px;
+                overflow: hidden;
+                padding-bottom: 2px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            iron-image {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
+        <div class="wrapper">
+            <div class="cover">
+                <slot name="cover"></slot>
+                <iron-image
+                    class="avatar"
+                    sizing="cover"
+                    preload
+                    fade
+                    src="https://hoc-staging.kano.me/assets/images/default-avatar.svg">
+                </iron-image>
+                <iron-image
+                    class="staff-picked-badge"
+                    sizing="cover"
+                    preload
+                    fade
+                    src="assets/featured.svg">
+                </iron-image>
+            </div>
+            <div class="title">
+                <span class="title-text">[[share.title]]</span>
+            </div>
+            <div id="actions">
+                <slot name="actions"></slot>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
     Polymer({
-
-      is: 'kwc-share-card',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'kwc-share-card',
+        is: 'kwc-share-card',
+        properties: {
+            share: {
+                type: Object,
+                value: null
+            }
         },
-      },
-
+        listeners: {
+            'actions.action-tapped': '_onActionTapped'
+        },
+        _onActionTapped (e) {
+            let action = e.detail;
+            if (action) {
+                this.fire(action, this.share);
+            }
+        }
     });
-  </script>
+    </script>
 </dom-module>
