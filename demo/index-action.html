@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kwc-share-card demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-image/iron-image.html">
+    <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../web-components/kano-icons/kano-icons.html">
+    <link rel="import" href="../kwc-share-card.html">
+    <link rel="import" href="../kwc-share-action.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+</head>
+<body>
+    <div class="vertical-section-container centered">
+        <h3>Basic kwc-share-action demo</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    kwc-share-action[action="like"] {
+                        --kwc-share-action-icon-color: var(--color-carnation);
+                    }
+                    kwc-share-action[action="remix"] {
+                        --kwc-share-action-icon-color: var(--color-azure);
+                    }
+                    kwc-share-action[action="custom"] {
+                        --kwc-share-action-icon-color: var(--color-kano-orange);
+                    }
+                </style>
+                <kwc-share-action active action="like" icon-id="like">Like</kwc-share-action>
+                <kwc-share-action action="remix" icon-id="remix">Remix</kwc-share-action>
+                <kwc-share-action action="custom">
+                    <iron-icon class="icon" icon="kano-icons:medals"></iron-icon>Custom
+                </kwc-share-action>
+            </template>
+        </demo-snippet>
+    </div>
+</body>
+</html>

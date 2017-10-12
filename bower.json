@@ -3,12 +3,23 @@
   "description": "Displays a creation made with Kano Code.",
   "main": "kwc-share-card.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.9.0"
+    "polymer": "Polymer/polymer#^1.9.0",
+    "kwc-style": "git@github.com:KanoComponents/kwc-style.git",
+    "web-components": "git@github.com:KanoComputing/web-components.git",
+    "iron-icon": "polymerelements/iron-icon#^2.0.1"
   },
   "devDependencies": {
+    "iron-image": "^2.1.2",
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "resolutions": {
+    "iron-flex-layout": "^1.0.0",
+    "iron-icon": "^1.0.0",
+    "iron-iconset-svg": "^1.0.0",
+    "webcomponentsjs": "^0.7.24",
+    "iron-image": "^2.1.2"
   }
 }

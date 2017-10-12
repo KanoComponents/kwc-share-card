@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kwc-share-card demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-image/iron-image.html">
+    <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../web-components/kano-icons/kano-icons.html">
+    <link rel="import" href="../kwc-share-card.html">
+    <link rel="import" href="../kwc-share-action.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles"></style>
+
+    </custom-style>
+</head>
+<body>
+    <div class="vertical-section-container centered">
+        <h3>Basic kwc-share-card demo</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    kwc-share-action[action="like"] {
+                        --kwc-share-action-icon-color: var(--color-carnation);
+                    }
+                    kwc-share-action[action="remix"] {
+                        --kwc-share-action-icon-color: var(--color-azure);
+                    }
+                    kwc-share-action[action="custom"] {
+                        --kwc-share-action-icon-color: var(--color-kano-orange);
+                    }
+                </style>
+
+                <kwc-share-card id="share-card" staff-picked>
+                    <div slot="cover">
+                        <iron-image
+                            style="width: 100%; height: 192px;"
+                            src="https://hoc-staging.kano.me/assets/images/build_challenges/orbit_moon.svg"
+                            sizing="cover"
+                            preload
+                            fade>
+                        </iron-image>
+                    </div>
+                    <div slot="actions">
+                        <kwc-share-action active action="like" icon-id="like">Like</kwc-share-action>
+                        <kwc-share-action action="remix" icon-id="remix">Remix</kwc-share-action>
+                        <kwc-share-action action="custom">
+                            <iron-icon class="icon" icon="kano-icons:medals"></iron-icon>Custom
+                        </kwc-share-action>
+                    </div>
+                </kwc-share-card>
+
+                <script type="text/javascript">
+                    let shareCard = document.querySelector('#share-card'),
+                        share = {
+                    		"id": "592413756152f967284f1b23",
+                    		"user": {
+                    			"id": "568ba6fb26c95db40e5af0e6",
+                    			"username": "Kevin86",
+                    			"admin_level": 0,
+                    			"joined": "2016-01-05T11:20:27.759Z",
+                    			"avatar": {
+                    				"urls": {
+                    					"circle": "https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-circle.png",
+                    					"landscape": "https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-landscape.png",
+                    					"character": "https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-character.png"
+                    				},
+                    				"generator": {
+                    					"character": ["Judoka_Base", {
+                    						"Stickers": "Sticker_Atom",
+                    						"Suits": "Suit_Blue",
+                    						"Faces": "Face_Scared",
+                    						"Hair": "Hair_Short_Light_Brown",
+                    						"Skins": "Skin_Warm",
+                    						"Belts": "Belt_Black"
+                    					}],
+                    					"version": 2,
+                    					"environment": ["all", "Dojo"]
+                    				}
+                    			},
+                    			"kanoClub": null,
+                    			"birthDate": null,
+                    			"buckets": []
+                    		},
+                    		"app": "make-apps",
+                    		"title": "Kevin86's Goes to the MOON",
+                    		"slug": "kevin86s-sound-to-light",
+                    		"likes": [
+                                {
+                        			"user": "58bd8c6597eea719f69015eb",
+                        			"_id": "5925b759f763cc6723952ca3",
+                        			"date": "2017-05-24T16:39:53.784Z"
+                        		}, {
+                        			"user": "587e19ca8d409a2c45d6c171",
+                        			"_id": "5926fbb0ca396918f4b07a9a",
+                        			"date": "2017-05-25T15:43:44.977Z"
+                        		}, {
+                        			"user": "58ac30c187971f1ff1c95bce",
+                        			"_id": "59280b7c72e97318f5480ca8",
+                        			"date": "2017-05-26T11:03:24.521Z"
+                        		}, {
+                        			"user": "59196804f763cc6723950f69",
+                        			"_id": "5928219172e97318f5480cfb",
+                        			"date": "2017-05-26T12:37:37.768Z"
+                        		}, {
+                        			"user": "59196893f763cc6723950f77",
+                        			"_id": "5928313fbad7e0024d1df38d",
+                        			"date": "2017-05-26T13:44:31.731Z"
+                        		}, {
+                        			"user": "5919696ff763cc6723950f87",
+                        			"_id": "592d54bc1e708e6ee7c2a7a8",
+                        			"date": "2017-05-30T11:17:16.992Z"
+                        		}, {
+                        			"user": "59196b7cf763cc6723950fa0",
+                        			"_id": "592d5b4bdda8ac6eec459b33",
+                        			"date": "2017-05-30T11:45:15.497Z"
+                        		}, {
+                        			"user": "59196c60f763cc6723950fae",
+                        			"_id": "592d5cd2dda8ac6eec459b86",
+                        			"date": "2017-05-30T11:51:46.805Z"
+                        		}, {
+                        			"user": "59196d71f763cc6723950fdd",
+                        			"_id": "592d740b1e708e6ee7c2a839",
+                        			"date": "2017-05-30T13:30:51.004Z"
+                        		}, {
+                        			"user": "587e19768d409a2c45d6c169",
+                        			"_id": "592d8358dda8ac6eec459c37",
+                        			"date": "2017-05-30T14:36:08.180Z"
+                        		}, {
+                        			"user": "587e1ea6aefbda2b45e09ce6",
+                        			"_id": "592d8d313d685309aae7f559",
+                        			"date": "2017-05-30T15:18:09.678Z"
+                        		}, {
+                        			"user": "587e1f5baefbda2b45e09cf5",
+                        			"_id": "592d93523d685309aae7f588",
+                        			"date": "2017-05-30T15:44:18.438Z"
+                        		}, {
+                        			"user": "5936aecf7d717c5195076724",
+                        			"_id": "5936ca6d7d717c5195077cf9",
+                        			"date": "2017-06-06T15:29:49.412Z"
+                        		}, {
+                        			"user": "5938118780ed400a70f01649",
+                        			"_id": "5938257880ed400a70f01a70",
+                        			"date": "2017-06-07T16:10:32.647Z"
+                        		}, {
+                        			"user": "5928253772e97318f5480d1a",
+                        			"_id": "5939190280ed400a70f020f9",
+                        			"date": "2017-06-08T09:29:38.315Z"
+                        		}, {
+                        			"user": "593eb461c511000a713e0205",
+                        			"_id": "593fc3da80ed400a70f0c5a3",
+                        			"date": "2017-06-13T10:52:10.592Z"
+                        		}, {
+                        			"user": "58cacd8b22d10d63294804b8",
+                        			"_id": "593fcc66c511000a713e1b8b",
+                        			"date": "2017-06-13T11:28:38.407Z"
+                        		}, {
+                        			"user": "594025fac511000a713e2c04",
+                        			"_id": "59402616c511000a713e2c1a",
+                        			"date": "2017-06-13T17:51:18.570Z"
+                        		}, {
+                        			"user": "594a6f4c68f9272e852252d2",
+                        			"_id": "594a765b0f3c5d2e8bbe3bcb",
+                        			"date": "2017-06-21T13:36:27.902Z"
+                        		}, {
+                        			"user": "583c1fefdc1c6aad4a5124c6",
+                        			"_id": "59562d1e3d0ba1402ae3eb9f",
+                        			"date": "2017-06-30T10:51:10.491Z"
+                        		}, {
+                        			"user": "56a22758db6d66200ff29046",
+                        			"_id": "595b742ef183d177bc9caca9",
+                        			"date": "2017-07-04T10:55:42.725Z"
+                        		}, {
+                        			"user": "59245f3ff763cc6723952bc4",
+                        			"_id": "5963631821f15309fd9d78a4",
+                        			"date": "2017-07-10T11:20:56.664Z"
+                        		}, {
+                        			"user": "596387a52ce68e09fc7994bc",
+                        			"_id": "59638b2f2ce68e09fc7997da",
+                        			"date": "2017-07-10T14:11:59.245Z"
+                        		}, {
+                        			"user": "59638ba52ce68e09fc799855",
+                        			"_id": "59638bb621f15309fd9d7efe",
+                        			"date": "2017-07-10T14:14:14.958Z"
+                        		}, {
+                        			"user": "59638c9e2ce68e09fc799977",
+                        			"_id": "59638ca821f15309fd9d7f1a",
+                        			"date": "2017-07-10T14:18:16.170Z"
+                        		}, {
+                        			"user": "59638e5921f15309fd9d8037",
+                        			"_id": "59638e6321f15309fd9d804c",
+                        			"date": "2017-07-10T14:25:39.497Z"
+                        		}, {
+                        			"user": "59638f1321f15309fd9d8143",
+                        			"_id": "59638f1f21f15309fd9d8158",
+                        			"date": "2017-07-10T14:28:47.306Z"
+                        		}, {
+                        			"user": "59638fb321f15309fd9d8210",
+                        			"_id": "59638fc321f15309fd9d822a",
+                        			"date": "2017-07-10T14:31:31.208Z"
+                        		}, {
+                        			"user": "5963906621f15309fd9d82ea",
+                        			"_id": "5963907721f15309fd9d830e",
+                        			"date": "2017-07-10T14:34:31.829Z"
+                        		}, {
+                        			"user": "596390da21f15309fd9d83af",
+                        			"_id": "5963915f21f15309fd9d83e3",
+                        			"date": "2017-07-10T14:38:23.296Z"
+                        		}, {
+                        			"user": "5963983d21f15309fd9d89ec",
+                        			"_id": "5963984f2ce68e09fc799cff",
+                        			"date": "2017-07-10T15:07:59.952Z"
+                        		}, {
+                        			"user": "59639b7f2ce68e09fc799f1b",
+                        			"_id": "59639b9b21f15309fd9d8d18",
+                        			"date": "2017-07-10T15:22:03.314Z"
+                        		}, {
+                        			"user": "596785abb79fe6291cdf47e2",
+                        			"_id": "596785bbb79fe6291cdf47f4",
+                        			"date": "2017-07-13T14:37:47.116Z"
+                        		}, {
+                        			"user": "5967873efc15a5291baefd28",
+                        			"_id": "5967874bb79fe6291cdf4d7a",
+                        			"date": "2017-07-13T14:44:27.690Z"
+                        		}, {
+                        			"user": "59678c89fc15a5291baf03d9",
+                        			"_id": "59678ca2fc15a5291baf03ed",
+                        			"date": "2017-07-13T15:07:14.639Z"
+                        		}, {
+                        			"user": "59678e5fb79fe6291cdf5953",
+                        			"_id": "59678e79fc15a5291baf04df",
+                        			"date": "2017-07-13T15:15:05.442Z"
+                        		}, {
+                        			"user": "59402bb7c511000a713e2d45",
+                        			"_id": "597705ed94e3ff22866cd7b7",
+                        			"date": "2017-07-25T08:48:45.393Z"
+                        		}
+                            ],
+                    		"flags": [],
+                    		"description": "",
+                    		"date_created": "2017-05-23T10:48:21.053Z",
+                    		"attachments": {
+                    			"cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
+                    			"attachment_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/attachments/592413756152f967284f1b23.html",
+                    			"resource_url": null,
+                    			"sample_url": null,
+                    			"workspace_info_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/workspace-info/592413756152f967284f1b23.json",
+                    			"lightboard_spritesheet_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/lightboard-spritesheets/592413756152f967284f1b23.png",
+                    			"animation_url": null
+                    		},
+                    		"hardware": [{
+                    			"product": "lightboard"
+                    		}],
+                    		"featured": true,
+                    		"comments_count": 3,
+                    		"launch_count": 0,
+                    		"views_count": 25,
+                    		"campaign_ref": {},
+                    		"hw_ref": {},
+                    		"remixAncestry": [],
+                    		"challengeRef": null,
+                    		"is_private": false,
+                    		"cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
+                    		"attachment_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/attachments/592413756152f967284f1b23.html",
+                    		"resource_url": null,
+                    		"sample_url": null,
+                    		"workspace_info_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/workspace-info/592413756152f967284f1b23.json"
+                        };
+
+                    shareCard.set('share', share);
+                    shareCard.addEventListener('like', (e) => {
+                        console.log('demo', 'liked', e.detail);
+                    });
+                    shareCard.addEventListener('remix', (e) => {
+                        console.log('demo', 'remixed', e.detail);
+                    });
+                    shareCard.addEventListener('custom', (e) => {
+                        console.log('demo', 'custom', e.detail);
+                    });
+                    shareCard.addEventListener('avatar-tapped', (e) => {
+                        console.log('demo', 'avatar tapped', e.detail);
+                    });
+                    shareCard.addEventListener('title-tapped', (e) => {
+                        console.log('demo', 'title tapped', e.detail);
+                    });
+                </script>
+            </template>
+        </demo-snippet>
+    </div>
+</body>
+</html>

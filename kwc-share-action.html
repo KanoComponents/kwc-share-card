@@ -1,0 +1,172 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../web-components/kano-icons/kano-icons.html">
+<link rel="import" href="../kwc-style/kwc-style.html">
+
+<!--
+`kwc-share-action`
+Perform actions such as like, remix or "send to kit" on the `kwc-share-card`.
+
+@demo demo/index-action.html
+-->
+
+<dom-module id="kwc-share-action">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+                cursor: pointer;
+                font-size: 14px;
+                line-height: 14px;
+                font-weight: bold;
+                margin-right: 24px;
+            }
+
+            /*DEFAULT STATE*/
+            .label-container {
+                color: var(--color-grey);
+            }
+            .icon-container .icon {
+                fill: var(--color-grey);
+            }
+            .icon-container,
+            .label-container {
+                display: inline-block;
+            }
+            .icon,
+            .label-container ::slotted(.icon) {
+                width: 16px;
+                height: 16px;
+                margin-right: 4px;
+                margin-top: -4px;
+            }
+
+            /*ACTIVE STATE*/
+            .active .label-container {
+                color: var(--color-black);
+            }
+            .active .icon-container .icon {
+                fill: var(--kwc-share-action-icon-color);
+            }
+            .active .icon,
+            .active .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-color);
+            }
+
+            /*HOVER STATE*/
+            .wrapper:hover .icon,
+            .wrapper:hover .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-color);
+            }
+            .wrapper:hover .label-container {
+                color: var(--color-black);
+            }
+        </style>
+        <div class$="wrapper [[_activeClass]]">
+            <div class="icon-container">
+                <template is="dom-if" if="[[_hasIcon]]">
+                    <template is="dom-if" if="[[active]]">
+                        <iron-icon class="icon" icon="kano-icons:[[iconId]]"></iron-icon>
+                    </template>
+                    <template is="dom-if" if="[[!active]]">
+                        <iron-icon class="icon" icon="kano-icons:[[iconId]]"></iron-icon>
+                    </template>
+                </template>
+            </div>
+            <div class="label-container">
+                <slot></slot>
+            </div>
+        </div>
+    </template>
+
+    <script>
+    Polymer({
+        is: 'kwc-share-action',
+        properties: {
+            /**
+             * Icon id from `kano-icons` to be displayed
+             * @type {String}
+             */
+            iconId: {
+                type: String,
+                value: null
+            },
+            /**
+             * Which event to be triggered by `kwc-share-card` when this element
+             * is tapped. For example: if `action` is `like`, when tapped,
+             * `kwc-share-card` will fire an event named `like` with the current
+             * share id.
+             * @type {String}
+             */
+            action: {
+                type: String,
+                value: null
+            },
+            /**
+             * Flags if this component is active or not. Active mostly means
+             * the icon will be coloured and the text (inside the slot) will be
+             * darker.
+             * @type {Boolean}
+             */
+            active: {
+                type: Boolean,
+                value: false
+            },
+            /**
+             * Flags if component has icon based on the existence or lack of
+             * `iconId`
+             * @type {Boolean}
+             */
+            _hasIcon: {
+                type: String,
+                computed: '_computeHasIcon(iconId)'
+            },
+            /**
+             * CSS class appended on the `.wrapper` element to identify if this
+             * component is active or not.
+             * @type {String}
+             */
+            _activeClass: {
+                type: String,
+                computed: '_computeActiveClass(active)'
+            }
+        },
+        listeners: {
+            /** Listen to every tap event on this component */
+            'tap': '_onTap'
+        },
+        /**
+         * Computes if component has icon or not based on the existence or lack
+         * of `iconId`
+         * @param {String} iconId `kano-icons` icon id.
+         * @return {Boolean}
+         */
+        _computeHasIcon (iconId) {
+            return iconId ? true : false;
+        },
+        /**
+         * Computes CSS class appended on the `.wrapper` element to identify if
+         * this component is active or not.
+         * @param {Boolean} active Wether the component is active or not.
+         * @return {String}
+         */
+        _computeActiveClass (active) {
+            return active ? 'active' : 'inactive';
+        },
+        /**
+         * Fired when anything on this component is tapped
+         *
+         * @event 'action-tapped'
+         * @param {String} action Which event to be fired by `kwc-share-card`.
+         */
+        /**
+         * Hadles every tap event on this component and fires an event named
+         * `action-tapped` with the `action` property as a parameter.
+         * @param {Event} e Event object from tap.
+         */
+        _onTap (e) {
+            this.fire('action-tapped', this.action);
+        }
+    });
+    </script>
+</dom-module>
