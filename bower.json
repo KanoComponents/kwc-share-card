@@ -6,10 +6,10 @@
     "polymer": "Polymer/polymer#^1.9.0",
     "kwc-style": "git@github.com:KanoComponents/kwc-style.git",
     "web-components": "git@github.com:KanoComputing/web-components.git",
+    "iron-image": "^2.1.2",
     "iron-icon": "polymerelements/iron-icon#^2.0.1"
   },
   "devDependencies": {
-    "iron-image": "^2.1.2",
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
