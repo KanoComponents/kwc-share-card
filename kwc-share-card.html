@@ -99,39 +99,99 @@ Display a creation made with Kano Code.
         Polymer({
             is: 'kwc-share-card',
             properties: {
+                /**
+                 * Object retrieved from API representing creation/share
+                 * information.
+                 * @type {Object}
+                 */
                 share: {
                     type: Object,
                     value: null
                 },
+                /** TODO: Encode a default avatar svg and use it instead */
+                /**
+                 * Image to fallback in case user doesn't have an avatar.
+                 * @type {String}
+                 */
                 defaultAvatar: {
                     type: String,
                     value: 'https://hoc-staging.kano.me/assets/images/default-avatar.svg'
                 },
+                /**
+                 * TODO: Encode a default staff picked svg badge, use it instead
+                 * and allow user to pass a custom one
+                 */
+                /**
+                 * Flags if this share has been staff picked.
+                 * @type {Boolean}
+                 */
                 staffPicked: {
                     type: Boolean,
                     value: false,
                     reflectToAttribute: true
                 },
+                /**
+                 * Computed source (`src`) data for the avatar to be displayed.
+                 * @type {String}
+                 */
                 _avatar: {
                     type: String,
                     computed: '_computeAvatar(share.user.avatar.urls.circle)'
                 }
             },
             listeners: {
+                /**
+                 * Listens to every event of type `action-tapped` that happens
+                 * inside the `actions` slotted
+                 */
                 'actions.action-tapped': '_onActionTapped'
             },
+            /**
+             * Handles `action-tapped` events from inside the `actions` slot.
+             * It's expected that the `action-tapped` event sends which `action`
+             * was tapped as its parameter. This method fires an event named
+             * by this `action` (for example: `like`, `remix`, `send-to-kit`)
+             * and pass the current share `id` as parameter.
+             * @param {Event} e Event object from `action-tapped`.
+             */
             _onActionTapped (e) {
                 let action = e.detail;
                 if (action) {
                     this.fire(action, this.share.id);
                 }
             },
+            /**
+             * Computes which avatar source (`src`) to be used. If user has
+             * an avatar use it, otherwise fallback to the `defaultAvatar`.
+             * @param {String} avatar Share's creator avatar.
+             * @return {String}
+             */
             _computeAvatar (avatar) {
                 return avatar ? avatar : this.defaultAvatar;
             },
+            /**
+             * Fired when avatar is tapped
+             *
+             * @event avatar-tapped
+             * @param {String} id User id of the tapped avatar.
+             */
+            /**
+             * Handles tap event on the avatar and fires `avatar-tapped`
+             * @param {Event} e Event object from tap.
+             */
             _onTapAvatar (e) {
                 this.fire('avatar-tapped', this.share.user.id);
             },
+            /**
+             * Fired when share title is tapped
+             *
+             * @event title-tapped
+             * @param {String} id Id of the tapped share title.
+             */
+            /**
+             * Handles tap event on the title and fires `title-tapped`
+             * @param {Event} e Event object from tap.
+             */
             _onTapTitle (e) {
                 this.fire('title-tapped', this.share.id);
             }
