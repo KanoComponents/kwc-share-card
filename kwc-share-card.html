@@ -19,8 +19,6 @@ Display a creation made with Kano Code.
             :host *[hidden] {
                 display: none !important;
             }
-            .wrapper {
-            }
             .cover {
                 position: relative;
                 margin-bottom: 10px;
@@ -68,16 +66,17 @@ Display a creation made with Kano Code.
             }
         </style>
 
-        <div class="wrapper">
-            <div class="cover">
-                <slot name="cover"></slot>
-                <iron-image
-                    class="avatar"
-                    sizing="cover"
-                    preload
-                    fade
-                    src="https://hoc-staging.kano.me/assets/images/default-avatar.svg">
-                </iron-image>
+        <div class="cover">
+            <slot name="cover"></slot>
+            <iron-image
+                on-tap="_onTapAvatar"
+                src="[[_avatar]]"
+                class="avatar"
+                sizing="cover"
+                preload
+                fade>
+            </iron-image>
+            <template is="dom-if" if="[[staffPicked]]">
                 <iron-image
                     class="staff-picked-badge"
                     sizing="cover"
@@ -85,35 +84,57 @@ Display a creation made with Kano Code.
                     fade
                     src="assets/featured.svg">
                 </iron-image>
-            </div>
-            <div class="title">
-                <span class="title-text">[[share.title]]</span>
-            </div>
-            <div id="actions">
-                <slot name="actions"></slot>
-            </div>
+            </template>
+        </div>
+        <div class="title" on-tap="_onTapTitle">
+            <span class="title-text">[[share.title]]</span>
+        </div>
+        <div id="actions">
+            <slot name="actions"></slot>
         </div>
 
     </template>
 
     <script>
-    Polymer({
-        is: 'kwc-share-card',
-        properties: {
-            share: {
-                type: Object,
-                value: null
+        Polymer({
+            is: 'kwc-share-card',
+            properties: {
+                share: {
+                    type: Object,
+                    value: null
+                },
+                defaultAvatar: {
+                    type: String,
+                    value: 'https://hoc-staging.kano.me/assets/images/default-avatar.svg'
+                },
+                staffPicked: {
+                    type: Boolean,
+                    value: false,
+                    reflectToAttribute: true
+                },
+                _avatar: {
+                    type: String,
+                    computed: '_computeAvatar(share.user.avatar.urls.circle)'
+                }
+            },
+            listeners: {
+                'actions.action-tapped': '_onActionTapped'
+            },
+            _onActionTapped (e) {
+                let action = e.detail;
+                if (action) {
+                    this.fire(action, this.share.id);
+                }
+            },
+            _computeAvatar (avatar) {
+                return avatar ? avatar : this.defaultAvatar;
+            },
+            _onTapAvatar (e) {
+                this.fire('avatar-tapped', this.share.user.id);
+            },
+            _onTapTitle (e) {
+                this.fire('title-tapped', this.share.id);
             }
-        },
-        listeners: {
-            'actions.action-tapped': '_onActionTapped'
-        },
-        _onActionTapped (e) {
-            let action = e.detail;
-            if (action) {
-                this.fire(action, this.share);
-            }
-        }
-    });
+        });
     </script>
 </dom-module>
