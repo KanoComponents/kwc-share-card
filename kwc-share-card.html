@@ -13,13 +13,13 @@ Display a creation made with Kano Code.
 <dom-module id="kwc-share-card">
     <template>
         <style>
-            :host {
-                display: block;
-                max-width: 256px;
-                font-family: var(--font-body);
-            }
             :host *[hidden] {
                 display: none !important;
+            }
+            .wrapper {
+                display: block;
+                width: 100%;
+                font-family: var(--font-body);
             }
             .cover {
                 position: relative;
@@ -68,33 +68,37 @@ Display a creation made with Kano Code.
             }
         </style>
 
-        <div class="cover">
-            <slot name="cover"></slot>
-            <iron-image
-                on-tap="_onTapAvatar"
-                src="[[_avatar]]"
-                class="avatar"
-                sizing="cover"
-                preload
-                fade>
-            </iron-image>
-            <template is="dom-if" if="[[staffPicked]]">
+        <div class="wrapper">
+            <div class="cover">
+                <slot name="cover"></slot>
                 <iron-image
-                    class="staff-picked-badge"
+                    on-tap="_onTapAvatar"
+                    src="[[_avatar]]"
+                    class="avatar"
                     sizing="cover"
                     preload
-                    fade
-                    src="assets/featured.svg">
+                    fade>
                 </iron-image>
-            </template>
+                <template is="dom-if" if="[[share.featured]]">
+                    <iron-image
+                        class="staff-picked-badge"
+                        sizing="cover"
+                        preload
+                        fade
+                        src$="[[_getEncodedAsset('featured')]]">
+                    </iron-image>
+                </template>
+            </div>
+            <div class="title" on-tap="_onTapTitle">
+                <!-- If you want to mark this post with an icon (for example animation)
+                you can slot it into this `title-icon` slot -->
+                <span><slot name="title-icon"></slot></span>
+                <span class="title-text">[[share.title]]</span>
+            </div>
+            <div id="actions">
+                <slot name="actions"></slot>
+            </div>
         </div>
-        <div class="title" on-tap="_onTapTitle">
-            <span class="title-text">[[share.title]]</span>
-        </div>
-        <div id="actions">
-            <slot name="actions"></slot>
-        </div>
-
     </template>
 
     <script>
@@ -110,7 +114,6 @@ Display a creation made with Kano Code.
                     type: Object,
                     value: null
                 },
-                /** TODO: Encode a default avatar svg and use it instead */
                 /**
                  * Image to fallback in case user doesn't have an avatar.
                  * @type {String}
