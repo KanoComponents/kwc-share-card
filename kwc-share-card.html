@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../kwc-style/kwc-style.html">
+<link rel="import" href="./assets/svgs.html">
 
 <!--
 `kwc-share-card`
@@ -116,20 +117,9 @@ Display a creation made with Kano Code.
                  */
                 defaultAvatar: {
                     type: String,
-                    value: 'https://hoc-staging.kano.me/assets/images/default-avatar.svg'
-                },
-                /**
-                 * TODO: Encode a default staff picked svg badge, use it instead
-                 * and allow user to pass a custom one
-                 */
-                /**
-                 * Flags if this share has been staff picked.
-                 * @type {Boolean}
-                 */
-                staffPicked: {
-                    type: Boolean,
-                    value: false,
-                    reflectToAttribute: true
+                    value: () => {
+                        return window.KwcShareCardAssets.assets['defaultAvatar'];
+                    }
                 },
                 /**
                  * Computed source (`src`) data for the avatar to be displayed.
@@ -195,6 +185,16 @@ Display a creation made with Kano Code.
              */
             _onTapTitle (e) {
                 this.fire('title-tapped', this.share.id);
+                this.fire('title-tapped', this.share);
+            },
+            /**
+             * Get `svg` data from asset dictionary by key.
+             * @param {String} assetName Disctionary key where `svg` data is
+             *     stored.
+             * @return {String}
+             */
+            _getEncodedAsset (assetName) {
+                return window.KwcShareCardAssets.assets[assetName];
             }
         });
     </script>
