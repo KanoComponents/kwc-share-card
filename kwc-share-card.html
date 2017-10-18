@@ -121,7 +121,7 @@ Display a creation made with Kano Code.
                 defaultAvatar: {
                     type: String,
                     value: () => {
-                        return window.KwcShareCardAssets.assets['defaultAvatar'];
+                        return window.Kano.Components.KwcShareCardAssets.assets['defaultAvatar'];
                     }
                 },
                 /**
@@ -196,7 +196,7 @@ Display a creation made with Kano Code.
              * @return {String}
              */
             _getEncodedAsset (assetName) {
-                return window.KwcShareCardAssets.assets[assetName];
+                return window.Kano.Components.KwcShareCardAssets.assets[assetName];
             }
         });
     </script>
