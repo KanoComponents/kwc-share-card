@@ -35,6 +35,10 @@
                     kwc-share-action[action="custom"] {
                         --kwc-share-action-icon-color: var(--color-kano-orange);
                     }
+                    iron-icon.title-icon {
+                        width: 20px;
+                        height: 20px;
+                    }
                 </style>
 
                 <kwc-share-card id="share-card">
@@ -48,7 +52,7 @@
                         </iron-image>
                     </div>
                     <span slot="title-icon">
-                        <iron-icon class="icon" icon="kano-icons:paint-brush"></iron-icon>
+                        <iron-icon class="icon title-icon" icon="kwc-ui-icons:user"></iron-icon>
                     </span>
                     <div slot="actions">
                         <kwc-share-action active action="like" icon-id="kwc-ui-icons:like">Like</kwc-share-action>
@@ -291,6 +295,9 @@
                     });
                     shareCard.addEventListener('title-tapped', (e) => {
                         console.log('demo', 'title tapped', e.detail);
+                    });
+                    shareCard.addEventListener('username-tapped', (e) => {
+                        console.log('demo', 'username tapped', e.detail);
                     });
                 </script>
             </template>
