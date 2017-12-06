@@ -29,7 +29,7 @@ Display a creation made with Kano Code.
             .cover .avatar {
                 position: absolute;
                 bottom: -10px;
-                left: 10px;
+                left: 16px;
                 height: 40px;
                 width: 40px;
                 border-radius: 100%;
@@ -43,24 +43,33 @@ Display a creation made with Kano Code.
                 height: 32px;
                 width: 32px;
             }
-            .title {
+            .title,
+            .username {
                 cursor: pointer;
-                font-size: 20px;
                 font-weight: bold;
-                line-height: 20px;
-                margin: 0 0 6px 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 width: 100%;
-
-                height: 28px;
             }
+            .username .username-text,
             .title .title-text {
-                height: 20px;
                 overflow: hidden;
-                padding-bottom: 2px;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+            }
+            .title {
+                font-size: 20px;
+                line-height: 20px;
+                margin-bottom: 8px;
+            }
+            .username {
+                font-size: 16px;
+                line-height: 16px;
+                margin-bottom: 8px;
+            }
+            .username .username-text {
+                color: var(--color-grey);
+                font-weight: bold;
             }
             iron-image {
                 width: 100%;
@@ -94,6 +103,9 @@ Display a creation made with Kano Code.
                 you can slot it into this `title-icon` slot -->
                 <span><slot name="title-icon"></slot></span>
                 <span class="title-text">[[share.title]]</span>
+            </div>
+            <div class="username" on-tap="_onTapUsername">
+                <span class="username-text">by [[share.user.username]]</span>
             </div>
             <div id="actions">
                 <slot name="actions"></slot>
@@ -175,6 +187,13 @@ Display a creation made with Kano Code.
              */
             _onTapAvatar (e) {
                 this.fire('avatar-tapped', this.share.user);
+            },
+            /**
+             * Handles tap event on the avatar and fires `avatar-tapped`
+             * @param {Event} e Event object from tap.
+             */
+            _onTapUsername (e) {
+                this.fire('username-tapped', this.share.user);
             },
             /**
              * Fired when share title is tapped
