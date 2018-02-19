@@ -23,7 +23,7 @@ Display a creation made with Kano Code.
             }
             .cover {
                 position: relative;
-                margin-bottom: 10px;
+                margin-bottom: 14px;
                 width: 100%;
             }
             .cover .avatar {
@@ -46,7 +46,6 @@ Display a creation made with Kano Code.
             .title,
             .username {
                 cursor: pointer;
-                font-weight: bold;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 width: 100%;
@@ -58,16 +57,18 @@ Display a creation made with Kano Code.
                 white-space: nowrap;
             }
             .title {
-                font-size: 20px;
-                line-height: 21px;
+                font-size: 24px;
+                line-height: 26px;
                 margin-bottom: 8px;
+                font-weight: bold;
             }
             .username {
                 font-size: 16px;
                 line-height: 16px;
-                margin-bottom: 8px;
+                margin-bottom: 16px;
+                color: var(--color-grey);
             }
-            .username .username-text {
+            .username-text {
                 color: var(--color-grey);
                 font-weight: bold;
             }
@@ -80,23 +81,9 @@ Display a creation made with Kano Code.
         <div class="wrapper">
             <div class="cover">
                 <slot name="cover"></slot>
-                <iron-image
-                    on-tap="_onTapAvatar"
-                    src="[[_avatar]]"
-                    class="avatar"
-                    sizing="cover"
-                    preload
-                    fade>
-                </iron-image>
-                <template is="dom-if" if="[[share.featured]]">
-                    <iron-image
-                        class="staff-picked-badge"
-                        sizing="cover"
-                        preload
-                        fade
-                        src$="[[_getEncodedAsset('featured')]]">
-                    </iron-image>
-                </template>
+                <img class="avatar"
+                     on-tap="_onTapAvatar"
+                     src="[[_avatar]]" />
             </div>
             <div class="title" on-tap="_onTapTitle">
                 <!-- If you want to mark this post with an icon (for example animation)
@@ -105,10 +92,13 @@ Display a creation made with Kano Code.
                 <span class="title-text">[[share.title]]</span>
             </div>
             <div class="username" on-tap="_onTapUsername">
-                <span class="username-text">by [[share.user.username]]</span>
+                by <span class="username-text"> [[share.user.username]]</span> [[_date]] ago
             </div>
             <div id="actions">
                 <slot name="actions"></slot>
+            </div>
+            <div id="details">
+                <slot name="details"></slot>
             </div>
         </div>
     </template>
@@ -143,6 +133,14 @@ Display a creation made with Kano Code.
                 _avatar: {
                     type: String,
                     computed: '_computeAvatar(share.user.avatar.urls.circle)'
+                },
+                /**
+                 * Computed date for share creation
+                 * @type {String}
+                 */
+                _date: {
+                    type: String,
+                    computed: '_convertDate(share.date_created)'
                 }
             },
             listeners: {
@@ -209,13 +207,40 @@ Display a creation made with Kano Code.
                 this.fire('title-tapped', this.share);
             },
             /**
-             * Get `svg` data from asset dictionary by key.
-             * @param {String} assetName Dictionary key where `svg` data is
-             *     stored.
-             * @return {String}
-             */
-            _getEncodedAsset (assetName) {
-                return window.Kano.Components.KwcShareCardAssets.assets[assetName];
+            * Computes the day/time a share was created
+            */
+            _convertDate(dateCreated) {
+                dateCreated = new Date(dateCreated);
+                let dateNow = new Date(),
+                    dateDifference = dateNow - dateCreated,
+                    dateInSeconds = Math.floor(dateDifference / 1000),
+                    dateInMinutes = Math.floor(dateInSeconds / 60),
+                    dateInHours = Math.floor(dateInMinutes / 60),
+                    dateInDays = Math.floor(dateInHours / 24),
+                    dateInWeeks = Math.floor(dateInDays / 7),
+                    dateInMonths = Math.floor(dateInDays / 30),
+                    dateInYears = Math.floor(dateInDays / 365);
+                if (dateInSeconds < 60) {
+                    return this.dateLabel(dateInSeconds, 'second');
+                } else if (dateInMinutes < 60) {
+                    return this.dateLabel(dateInMinutes, 'minute');
+                } else if (dateInHours < 24) {
+                    return this.dateLabel(dateInHours, 'hour');
+                } else if (dateInDays < 7) {
+                    return this.dateLabel(dateInDays, 'day');
+                } else if (dateInDays < 30) {
+                    return this.dateLabel(dateInWeeks, 'week');
+                } else if (dateInDays > 30 && dateInDays < 365) {
+                    return this.dateLabel(dateInMonths, 'month');
+                } else if (dateInDays > 365) {
+                    return this.dateLabel(dateInYears, 'year');
+                }
+            },
+            dateLabel(dateInUnitTime, unit) {
+              let label;
+              label = dateInUnitTime + ` ${unit}`;
+              dateInUnitTime === 1 ? label : label = label + 's';
+              return label;
             }
         });
     </script>
