@@ -136,7 +136,7 @@ Display a creation made with Kano Code.
                  */
                 _avatar: {
                     type: String,
-                    computed: '_computeAvatar(share.user.avatar.urls.circle)'
+                    computed: '_computeAvatar(share.user.avatar.urls.world, share.user.avatar.urls.circle)'
                 },
                 /**
                  * Computed date for share creation
@@ -174,8 +174,14 @@ Display a creation made with Kano Code.
              * @param {String} avatar Share's creator avatar.
              * @return {String}
              */
-            _computeAvatar (avatar) {
-                return avatar ? avatar : this.defaultAvatar;
+            _computeAvatar (worldAvatar, circleAvatar) {
+                if (worldAvatar) {
+                    return worldAvatar;
+                } else if (circleAvatar) {
+                    return circleAvatar;
+                } else {
+                    return this.defaultAvatar;
+                }
             },
             /**
              * Fired when avatar is tapped
