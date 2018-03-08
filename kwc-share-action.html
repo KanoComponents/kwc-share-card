@@ -27,7 +27,7 @@ Custom property | Description | Default
         <style>
             :host {
                 display: inline-block;
-                cursor: pointer;
+                cursor: var(--kwc-share-action-host-cursor, pointer);
                 font-size: 14px;
                 line-height: 14px;
                 font-weight: bold;
@@ -35,8 +35,13 @@ Custom property | Description | Default
             }
 
             /*DEFAULT STATE*/
+            .wrapper {
+                padding: 8px 14px;
+                background-color: #f6f7f9;
+                border-radius: 15px;
+            }
             .label-container {
-                color: var(--kwc-share-action-default-label-color, var(--color-grey));
+                color: var(--kwc-share-action-default-label-color, var(--color-chateau));
             }
             .icon-container .icon {
                 fill: var(--kwc-share-action-default-label-color, var(--color-grey));
@@ -55,7 +60,7 @@ Custom property | Description | Default
 
             /*ACTIVE STATE*/
             .active .label-container {
-                color: var(--kwc-share-action-label-color, var(--color-black));
+                color: var(--kwc-share-action-label-color, var(--color-chateau));
             }
             .active .icon-container .icon {
                 fill: var(--kwc-share-action-icon-color, var(--color-grey));
@@ -66,12 +71,15 @@ Custom property | Description | Default
             }
 
             /*HOVER STATE*/
+            .wrapper:hover {
+                background-color: var(--kwc-share-action-wrapper-hover, #e5e8ed)
+            }
             .wrapper:hover .icon,
             .wrapper:hover .label-container ::slotted(.icon) {
                 fill: var(--kwc-share-action-icon-color, var(--color-grey));
             }
             .wrapper:hover .label-container {
-                color: var(--kwc-share-action-label-color, var(--color-black));
+                color: var(--kwc-share-action-label-color, var(--color-chateau));
             }
         </style>
         <div class$="wrapper [[_activeClass]]">
