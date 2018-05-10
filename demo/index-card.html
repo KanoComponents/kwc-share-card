@@ -39,6 +39,15 @@
                         width: 20px;
                         height: 20px;
                     }
+					.actions {
+						@apply --layout-horizontal;
+					}
+					.actions kwc-share-action:first-child {
+						margin-left: 0px;
+					}
+					.actions kwc-share-action {
+						margin-left: 10px;
+					}
                 </style>
 
                 <kwc-share-card id="share-card">
@@ -54,7 +63,7 @@
                     <span slot="title-icon">
                         <iron-icon class="icon title-icon" icon="kwc-ui-icons:user"></iron-icon>
                     </span>
-                    <div slot="actions">
+                    <div slot="actions" class="actions">
                         <kwc-share-action active action="like" icon-id="kwc-ui-icons:like">Like</kwc-share-action>
                         <kwc-share-action action="comment" icon-id="kwc-ui-icons:comment">Comment</kwc-share-action>
                         <kwc-share-action action="custom">
