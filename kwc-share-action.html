@@ -204,6 +204,11 @@ Custom property | Description | Default
         _onTap (e) {
             this.fire('action-tapped', this.action);
         },
+        /**
+         * Toggles active state of the button.
+         *
+         * @return {Boolean}
+         */
         toggleActive () {
             this.active = !this.active;
             return this.active;
