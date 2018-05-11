@@ -20,25 +20,17 @@
     <script type="text/javascript">
         let SHARES = [
             {
-                "attachments": {
-                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
-                    "lightboard_spritesheet_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/lightboard-spritesheets/592413756152f967284f1b23.png"
-                }
+                "imageUrl": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
+                "spritesheetUrl": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/lightboard-spritesheets/592413756152f967284f1b23.png"
             },
             {
-                "attachments": {
-                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
-                }
+                "imageUrl": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
             },
             {
-                "attachments": {
-                    "cover_url": "https://s3-us-west-1.amazonaws.com/assets.kano.me/community/make_music.jpg"
-                }
+                "imageUrl": "https://s3-us-west-1.amazonaws.com/assets.kano.me/community/make_music.jpg"
             },
             {
-                "attachments": {
-                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me/share-items/covers/5aad5b08548fdd4a3af9f13f.png"
-                }
+                "imageUrl": "https://s3-eu-west-1.amazonaws.com/world.kano.me/share-items/covers/5aad5b08548fdd4a3af9f13f.png"
             }
         ];
     </script>
@@ -52,7 +44,8 @@
                 <kwc-share-cover id="cover-1"></kwc-share-cover>
                 <script type="text/javascript">
                     let shareCover = document.querySelector('#cover-1');
-                    shareCover.share = SHARES[0];
+                    shareCover.imageUrl = SHARES[0].imageUrl;
+                    shareCover.spritesheetUrl = SHARES[0].spritesheetUrl;
                 </script>
             </template>
         </demo-snippet>
@@ -68,7 +61,7 @@
                 <kwc-share-cover id="cover-2"></kwc-share-cover>
                 <script type="text/javascript">
                     shareCover = document.querySelector('#cover-2');
-                    shareCover.share = SHARES[1];
+                    shareCover.imageUrl = SHARES[1].imageUrl;
                 </script>
             </template>
         </demo-snippet>
@@ -84,7 +77,7 @@
                 <kwc-share-cover id="cover-3"></kwc-share-cover>
                 <script type="text/javascript">
                     shareCover = document.querySelector('#cover-3');
-                    shareCover.share = SHARES[2];
+                    shareCover.imageUrl = SHARES[2].imageUrl;
                 </script>
             </template>
         </demo-snippet>
@@ -100,7 +93,7 @@
                 <kwc-share-cover id="cover-4"></kwc-share-cover>
                 <script type="text/javascript">
                     shareCover = document.querySelector('#cover-4');
-                    shareCover.share = SHARES[3];
+                    shareCover.imageUrl = SHARES[3].imageUrl;
                 </script>
             </template>
         </demo-snippet>
@@ -127,10 +120,11 @@
                     <kwc-share-cover class="small" id="cover-8"></kwc-share-cover>
                 </div>
                 <script type="text/javascript">
-                    document.querySelector('#cover-5').share = SHARES[0];
-                    document.querySelector('#cover-6').share = SHARES[1];
-                    document.querySelector('#cover-7').share = SHARES[2];
-                    document.querySelector('#cover-8').share = SHARES[3];
+                    document.querySelector('#cover-5').imageUrl = SHARES[0].imageUrl;
+                    document.querySelector('#cover-5').spritesheetUrl = SHARES[0].spritesheetUrl;
+                    document.querySelector('#cover-6').imageUrl = SHARES[1].imageUrl;
+                    document.querySelector('#cover-7').imageUrl = SHARES[2].imageUrl;
+                    document.querySelector('#cover-8').imageUrl = SHARES[3].imageUrl;
                 </script>
             </template>
         </demo-snippet>
