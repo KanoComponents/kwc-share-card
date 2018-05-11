@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kwc-share-cover demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../kwc-share-cover.html">
+
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles"></style>
+    </custom-style>
+</head>
+<body>
+    <script type="text/javascript">
+        let SHARES = [
+            {
+                "attachments": {
+                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
+                    "lightboard_spritesheet_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/lightboard-spritesheets/592413756152f967284f1b23.png"
+                }
+            },
+            {
+                "attachments": {
+                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me.staging/share-items/covers/592413756152f967284f1b23.png",
+                }
+            },
+            {
+                "attachments": {
+                    "cover_url": "https://s3-us-west-1.amazonaws.com/assets.kano.me/community/make_music.jpg"
+                }
+            },
+            {
+                "attachments": {
+                    "cover_url": "https://s3-eu-west-1.amazonaws.com/world.kano.me/share-items/covers/5aad5b08548fdd4a3af9f13f.png"
+                }
+            }
+        ];
+    </script>
+
+    <div class="vertical-section-container centered">
+        <h3>Spritesheet kwc-share-cover</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                </style>
+                <kwc-share-cover id="cover-1"></kwc-share-cover>
+                <script type="text/javascript">
+                    let shareCover = document.querySelector('#cover-1');
+                    shareCover.share = SHARES[0];
+                </script>
+            </template>
+        </demo-snippet>
+
+        <h3>Regular kwc-share-cover</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    #cover-2 {
+                        width: 100%;
+                    }
+                </style>
+                <kwc-share-cover id="cover-2"></kwc-share-cover>
+                <script type="text/javascript">
+                    shareCover = document.querySelector('#cover-2');
+                    shareCover.share = SHARES[1];
+                </script>
+            </template>
+        </demo-snippet>
+
+        <h3>Sound sample kwc-share-cover</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    #cover-3 {
+                        width: 100%;
+                    }
+                </style>
+                <kwc-share-cover id="cover-3"></kwc-share-cover>
+                <script type="text/javascript">
+                    shareCover = document.querySelector('#cover-3');
+                    shareCover.share = SHARES[2];
+                </script>
+            </template>
+        </demo-snippet>
+
+        <h3>Make art kwc-share-cover</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    #cover-4 {
+                        width: 100%;
+                    }
+                </style>
+                <kwc-share-cover id="cover-4"></kwc-share-cover>
+                <script type="text/javascript">
+                    shareCover = document.querySelector('#cover-4');
+                    shareCover.share = SHARES[3];
+                </script>
+            </template>
+        </demo-snippet>
+
+        <h3>Same size covers</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    .wrapper {
+                        @apply --layout-horizontal;
+                        @apply --layout-wrap;
+                    }
+                    kwc-share-cover.small {
+                        width: 172px;
+                        max-height: 86px;
+                        overflow: hidden;
+                        margin: 2px;
+                    }
+                </style>
+                <div class="wrapper">
+                    <kwc-share-cover class="small" id="cover-5"></kwc-share-cover>
+                    <kwc-share-cover class="small" id="cover-6"></kwc-share-cover>
+                    <kwc-share-cover class="small" id="cover-7"></kwc-share-cover>
+                    <kwc-share-cover class="small" id="cover-8"></kwc-share-cover>
+                </div>
+                <script type="text/javascript">
+                    document.querySelector('#cover-5').share = SHARES[0];
+                    document.querySelector('#cover-6').share = SHARES[1];
+                    document.querySelector('#cover-7').share = SHARES[2];
+                    document.querySelector('#cover-8').share = SHARES[3];
+                </script>
+            </template>
+        </demo-snippet>
+    </div>
+</body>
+</html>
