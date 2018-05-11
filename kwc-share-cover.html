@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../kwc-lightboard-preview/kwc-lightboard-preview.html">
+
+
+<!--
+`kwc-share-cover`
+
+Renders an appropriate cover for any share.
+
+@demo demo/index-cover.html
+-->
+
+<dom-module id="kwc-share-cover">
+    <template>
+        <style>
+            :host {
+                display: block;
+                overflow: hidden;
+            }
+            .share-card-cover {
+                width: 100%;
+            }
+            .share-cover-image {
+                display: block;
+                width: 100%;
+            }
+        </style>
+        <div class="share-card-cover" slot="cover">
+            <template is="dom-if" if="[[spritesheetUrl]]">
+                <kwc-lightboard-preview
+                    class="share-cover-image"
+                    src="[[spritesheetUrl]]">
+                </kwc-lightboard-preview>
+            </template>
+            <template is="dom-if" if="[[!spritesheetUrl]]">
+                <img class="share-cover-image" src="[[imageUrl]]" />
+            </template>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'kwc-share-cover',
+            properties: {
+                /**
+                 * URL of a static cover image.
+                 *
+                 * @type {String}
+                 */
+                imageUrl: {
+                    type: String,
+                    value: null
+                },
+                /**
+                 * URL of a lightboard spritesheet.
+                 * Takes precedence over `imageUrl`.
+                 *
+                 * @type {String}
+                 */
+                spritesheetUrl: {
+                    type: String,
+                    value: null
+                }
+            }
+        });
+    </script>
+</dom-module>
