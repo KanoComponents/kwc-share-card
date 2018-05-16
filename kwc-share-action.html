@@ -14,12 +14,18 @@ for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--kwc-share-action-default-wrapper-color` | Default background color of the wrapper | `#f6f7f9`
-`--kwc-share-action-default-label-color` | Default color of the icon | `--color-grey`
-`--kwc-share-action-default-icon-color` | Default color of the icon | `--color-grey`
-`--kwc-share-action-wrapper-color` | Color of the icon when hovering or active | `#f6f7f9`
-`--kwc-share-action-icon-color` | Color of the icon when hovering or active | `--color-grey`
-`--kwc-share-action-label-color` | Color of the label when hovering or active | `--color-black`
+`--kwc-share-action-wrapper-color` | Default background color of the wrapper | `#f6f7f9`
+`--kwc-share-action-label-color` | Default color of the icon | `--color-chateau`
+`--kwc-share-action-icon-color` | Default color of the icon | `--color-grey`
+`--kwc-share-action-wrapper-hover-color` | Color of the icon when hovering | `#e5e8eC`
+`--kwc-share-action-icon-hover-color` | Color of the icon when hovering | `--color-grey`
+`--kwc-share-action-label-hover-color` | Color of the label when hovering | `--color-chateau`
+`--kwc-share-action-wrapper-active-color` | Color of the icon when active | `#f6f7f9`
+`--kwc-share-action-icon-active-color` | Color of the icon when active | `--color-grey`
+`--kwc-share-action-label-active-color` | Color of the label when active | `--color-chateau`
+`--kwc-share-action-wrapper-active-hover-color` | Hover color of the icon when active | `#e5e8eC`
+`--kwc-share-action-icon-active-hover-color` | Hover color of the icon when active | `--color-grey`
+`--kwc-share-action-label-active-hover-color` | Hover color of the label when active | `--color-chateau`
 
 @demo demo/index-action.html
 -->
@@ -38,13 +44,13 @@ Custom property | Description | Default
             /*DEFAULT STATE*/
             .wrapper {
                 padding: 6px 15px;
-                background-color: var(--kwc-share-action-default-wrapper-color, #f6f7f9);
+                background-color: var(--kwc-share-action-wrapper-color, #f6f7f9);
                 border-radius: 34px;
 
                 @apply --layout-horizontal;
             }
             .label-container {
-                color: var(--kwc-share-action-default-label-color, var(--color-chateau));
+                color: var(--kwc-share-action-label-color, var(--color-chateau));
             }
             .label-container.extra-margin {
                 margin-left: 9px;
@@ -53,11 +59,9 @@ Custom property | Description | Default
             .label-container.extra-margin:empty {
                 margin: 0px;
             }
-            .icon-container .icon {
-                fill: var(--kwc-share-action-default-label-color, var(--color-grey));
-            }
             .icon,
             .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-color, var(--color-grey));
                 width: 16px;
                 height: 16px;
                 margin-top: -2px;
@@ -67,31 +71,43 @@ Custom property | Description | Default
                 margin-right: 9px;
             }
 
-            /*ACTIVE STATE*/
-            .wrapper.active {
-                background-color: var(--kwc-share-action-wrapper-color, #f6f7f9);
-            }
-            .active .label-container {
-                color: var(--kwc-share-action-label-color, var(--color-chateau));
-            }
-            .active .icon-container .icon {
-                fill: var(--kwc-share-action-icon-color, var(--color-grey));
-            }
-            .active .icon,
-            .active .label-container ::slotted(.icon) {
-                fill: var(--kwc-share-action-icon-color, var(--color-grey));
-            }
-
             /*HOVER STATE*/
             .wrapper:hover {
-                background-color: var(--kwc-share-action-wrapper-hover, #e5e8eC)
+                background-color: var(--kwc-share-action-wrapper-hover-color, #e5e8eC);
             }
             .wrapper:hover .icon,
             .wrapper:hover .label-container ::slotted(.icon) {
-                fill: var(--kwc-share-action-icon-color, var(--color-grey));
+                fill: var(--kwc-share-action-icon-hover-color, var(--kwc-share-action-icon-color));
             }
             .wrapper:hover .label-container {
-                color: var(--kwc-share-action-label-color, var(--color-chateau));
+                color: var(--kwc-share-action-label-hover-color, var(--kwc-share-action-label-color));
+            }
+
+            /*ACTIVE STATE*/
+            .wrapper.active {
+                background-color: var(--kwc-share-action-wrapper-active-color, #f6f7f9);
+            }
+            .active .label-container {
+                color: var(--kwc-share-action-label-active-color, var(--color-chateau));
+            }
+            .active .icon-container .icon {
+                fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
+            }
+            .active .icon,
+            .active .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
+            }
+
+            /*ACTIVE HOVER STATE*/
+            .wrapper.active:hover {
+                background-color: var(--kwc-share-action-wrapper-active-hover-color, #e5e8eC);
+            }
+            .wrapper.active:hover .icon,
+            .wrapper.active:hover .label-container ::slotted(.icon) {
+                fill: var(--kwc-share-action-icon-active-hover-color, var(--kwc-share-action-icon-active-color));
+            }
+            .wrapper.active:hover .label-container {
+                color: var(--kwc-share-action-label-active-hover-color, var(--kwc-share-action-label-active-color));
             }
         </style>
         <div class$="wrapper [[_activeClass]]">
