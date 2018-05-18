@@ -21,15 +21,22 @@ Renders an appropriate cover for any share.
             .share-card-cover {
                 width: 100%;
             }
+            .share-cover-spritesheet,
             .share-cover-image {
                 display: block;
                 width: 100%;
+            }
+            .share-cover-image {
+                @apply --kwc-share-cover-image;
+            }
+            .share-cover-spritesheet {
+                @apply --kwc-share-cover-spritesheet;
             }
         </style>
         <div class="share-card-cover" slot="cover">
             <template is="dom-if" if="[[spritesheetUrl]]">
                 <kwc-lightboard-preview
-                    class="share-cover-image"
+                    class="share-cover-spritesheet"
                     src="[[spritesheetUrl]]">
                 </kwc-lightboard-preview>
             </template>
