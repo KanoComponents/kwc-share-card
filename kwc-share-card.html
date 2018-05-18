@@ -54,6 +54,13 @@ Display a creation made with Kano Code.
                 line-height: 26px;
                 margin-bottom: 8px;
                 font-weight: bold;
+                @apply --layout-horizontal;
+            }
+            .title .title-text {
+                margin-right: auto;
+            }
+            .title .title-icon {
+                @apply --layout-end;
             }
             .username {
                 font-size: 16px;
@@ -83,10 +90,10 @@ Display a creation made with Kano Code.
                      src="[[_avatar]]" />
             </div>
             <div class="title" on-tap="_onTapTitle">
-                <span class="title-text">[[share.title]]</span>
+                <div class="title-text">[[share.title]]</div>
                 <!-- If you want to mark this post with an icon (for example animation)
                 you can slot it into this `title-icon` slot -->
-                <span><slot name="title-icon"></slot></span>
+                <div class="title-icon"><slot name="title-icon"></slot></div>
             </div>
             <div class="username" on-tap="_onTapUsername">
                 by <span class="username-text"> [[share.user.username]]</span> [[_date]] ago
