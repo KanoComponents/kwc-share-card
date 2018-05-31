@@ -27,8 +27,7 @@
             <template>
                 <style is="custom-style">
                     .wrapper {
-                        @apply --layout-horizontal;
-                        @apply --layout-wrap;
+                        display: flex;
                     }
                     kwc-share-action {
                         margin: 3px;
@@ -58,9 +57,9 @@
                     }
                 </style>
                 <div class="wrapper">
-                    <kwc-share-action active action="like" icon-id="kwc-ui-icons:like">Like</kwc-share-action>
-                    <kwc-share-action active action="like" icon-id="kwc-ui-icons:like"></kwc-share-action>
-                    <kwc-share-action action="comment" icon-id="kwc-ui-icons:comment">Comment</kwc-share-action>
+                    <kwc-share-action active icon="kwc-ui-icons:like">Like</kwc-share-action>
+                    <kwc-share-action active icon="kwc-ui-icons:remix">Remix</kwc-share-action>
+                    <kwc-share-action action="comment" icon="kwc-ui-icons:comment">Comment</kwc-share-action>
                     <kwc-share-action action="custom">
                         <iron-icon class="icon" icon="kwc-ui-icons:medal"></iron-icon>Custom
                     </kwc-share-action>

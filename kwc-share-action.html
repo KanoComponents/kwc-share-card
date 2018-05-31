@@ -113,7 +113,7 @@ Custom property | Description | Default
         <div class$="wrapper [[_activeClass]]">
             <div class="icon-container">
                 <template is="dom-if" if="[[_hasIcon]]">
-                    <iron-icon class="icon" icon="[[iconId]]"></iron-icon>
+                    <iron-icon class="icon" icon="[[icon]]"></iron-icon>
                 </template>
             </div>
             <div class$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
@@ -128,18 +128,7 @@ Custom property | Description | Default
              * Icon id from `kano-icons` to be displayed
              * @type {String}
              */
-            iconId: {
-                type: String,
-                value: null
-            },
-            /**
-             * Which event to be triggered by `kwc-share-card` when this element
-             * is tapped. For example: if `action` is `like`, when tapped,
-             * `kwc-share-card` will fire an event named `like` with the current
-             * share id.
-             * @type {String}
-             */
-            action: {
+            icon: {
                 type: String,
                 value: null
             },
@@ -155,12 +144,12 @@ Custom property | Description | Default
             },
             /**
              * Flags if component has icon based on the existence or lack of
-             * `iconId`
+             * `icon`
              * @type {Boolean}
              */
             _hasIcon: {
                 type: String,
-                computed: '_computeHasIcon(iconId)'
+                computed: '_computeHasIcon(icon)'
             },
             /**
              * CSS class appended on the `.wrapper` element to identify if this
@@ -172,19 +161,15 @@ Custom property | Description | Default
                 computed: '_computeActiveClass(active)'
             }
         },
-        listeners: {
-            /** Listen to every tap event on this component */
-            'tap': '_onTap'
-        },
         /**
          * Computes if component has icon or not based on the existence or lack
-         * of `iconId`
+         * of `icon`
          *
-         * @param {String} iconId `kano-icons` icon id.
+         * @param {String} icon `kano-icons` icon id.
          * @return {Boolean}
          */
-        _computeHasIcon (iconId) {
-            return iconId ? true : false;
+        _computeHasIcon(icon) {
+            return icon ? true : false;
         },
         /**
          * Computes CSS class appended on the `.wrapper` element to identify if
@@ -193,7 +178,7 @@ Custom property | Description | Default
          * @param {Boolean} active Wether the component is active or not.
          * @return {String}
          */
-        _computeActiveClass (active) {
+        _computeActiveClass(active) {
             return active ? 'active' : 'inactive';
         },
         /**
@@ -203,29 +188,15 @@ Custom property | Description | Default
          * @param {Boolean} hasIcon Has icon assigned?
          * @return {String}
          */
-         _computeLabelContainerClass (hasIcon) {
+         _computeLabelContainerClass(hasIcon) {
             return hasIcon ? 'extra-margin' : '';
-        },
-        /**
-         * Fired when anything on this component is tapped
-         *
-         * @event 'action-tapped'
-         * @param {String} action Which event to be fired by `kwc-share-card`.
-         */
-        /**
-         * Hadles every tap event on this component and fires an event named
-         * `action-tapped` with the `action` property as a parameter.
-         * @param {Event} e Event object from tap.
-         */
-        _onTap (e) {
-            this.fire('action-tapped', this.action);
         },
         /**
          * Toggles active state of the button.
          *
          * @return {Boolean}
          */
-        toggleActive () {
+        toggleActive() {
             this.active = !this.active;
             return this.active;
         }
