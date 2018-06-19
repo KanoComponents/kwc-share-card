@@ -55,7 +55,8 @@
             <template>
                 <style is="custom-style">
                     #cover-2 {
-                        width: 100%;
+                        width: 300px;
+                        height: 300px;
                     }
                 </style>
                 <kwc-share-cover id="cover-2"></kwc-share-cover>
@@ -66,12 +67,35 @@
             </template>
         </demo-snippet>
 
+        <h3>Custom kwc-share-cover</h3>
+        <demo-snippet>
+            <template>
+                <style is="custom-style">
+                    #cover-custom {
+                        width: 300px;
+                        height: 300px;
+                        --kwc-share-cover-placeholder: red;
+                    }
+                </style>
+                <kwc-share-cover
+                    id="cover-custom"
+                    sizing="cover"
+                    fallback-url="https://goo.gl/GA2cEF">
+                </kwc-share-cover>
+                <script type="text/javascript">
+                    shareCover = document.querySelector('#cover-custom');
+                    shareCover.imageUrl = '//kano.me/broken-url.png';
+                </script>
+            </template>
+        </demo-snippet>
+
         <h3>Sound sample kwc-share-cover</h3>
         <demo-snippet>
             <template>
                 <style is="custom-style">
                     #cover-3 {
-                        width: 100%;
+                        width: 300px;
+                        height: 150px;
                     }
                 </style>
                 <kwc-share-cover id="cover-3"></kwc-share-cover>
@@ -87,7 +111,8 @@
             <template>
                 <style is="custom-style">
                     #cover-4 {
-                        width: 100%;
+                        width: 300px;
+                        height: 300px;
                     }
                 </style>
                 <kwc-share-cover id="cover-4"></kwc-share-cover>
@@ -108,16 +133,33 @@
                     }
                     kwc-share-cover.small {
                         width: 172px;
+                        height: 86px;
                         max-height: 86px;
                         overflow: hidden;
                         margin: 2px;
                     }
                 </style>
                 <div class="wrapper">
-                    <kwc-share-cover class="small" id="cover-5"></kwc-share-cover>
-                    <kwc-share-cover class="small" id="cover-6"></kwc-share-cover>
-                    <kwc-share-cover class="small" id="cover-7"></kwc-share-cover>
-                    <kwc-share-cover class="small" id="cover-8"></kwc-share-cover>
+                    <kwc-share-cover
+                        class="small"
+                        id="cover-5"
+                        fallback-url="https://goo.gl/GA2cEF">
+                    </kwc-share-cover>
+                    <kwc-share-cover
+                        class="small"
+                        id="cover-6"
+                        fallback-url="https://goo.gl/GA2cEF">
+                    </kwc-share-cover>
+                    <kwc-share-cover
+                        class="small"
+                        id="cover-7"
+                        fallback-url="https://goo.gl/GA2cEF">
+                    </kwc-share-cover>
+                    <kwc-share-cover
+                        class="small"
+                        id="cover-8"
+                        fallback-url="https://goo.gl/GA2cEF">
+                    </kwc-share-cover>
                 </div>
                 <script type="text/javascript">
                     document.querySelector('#cover-5').imageUrl = SHARES[0].imageUrl;
