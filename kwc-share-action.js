@@ -1,9 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../kwc-icons/kwc-icons.html">
-<link rel="import" href="../kwc-style/kwc-style.html">
-
-<!--
+/**
 `kwc-share-action`
 Perform actions such as like, remix or "send to kit" on the `kwc-share-card`.
 
@@ -28,10 +23,21 @@ Custom property | Description | Default
 `--kwc-share-action-label-active-hover-color` | Hover color of the label when active | `--color-chateau`
 
 @demo demo/index-action.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="kwc-share-action">
-    <template>
+import '@polymer/iron-icon/iron-icon.js';
+import '@kano/kwc-icons/kwc-icons.js';
+import '@kano/kwc-style/kwc-style.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
         <style>
             :host {
                 display: block;
@@ -110,96 +116,97 @@ Custom property | Description | Default
                 color: var(--kwc-share-action-label-active-hover-color, var(--kwc-share-action-label-active-color));
             }
         </style>
-        <div class$="wrapper [[_activeClass]]">
+        <div class\$="wrapper [[_activeClass]]">
             <div class="icon-container">
                 <template is="dom-if" if="[[_hasIcon]]">
                     <iron-icon class="icon" icon="[[icon]]"></iron-icon>
                 </template>
             </div>
-            <div class$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
+            <div class\$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
         </div>
-    </template>
+`,
 
-    <script>
-    Polymer({
-        is: 'kwc-share-action',
-        properties: {
-            /**
-             * Icon id from `kano-icons` to be displayed
-             * @type {String}
-             */
-            icon: {
-                type: String,
-                value: null
-            },
-            /**
-             * Flags if this component is active or not. Active mostly means
-             * the icon will be coloured and the text (inside the slot) will be
-             * darker.
-             * @type {Boolean}
-             */
-            active: {
-                type: Boolean,
-                value: false
-            },
-            /**
-             * Flags if component has icon based on the existence or lack of
-             * `icon`
-             * @type {Boolean}
-             */
-            _hasIcon: {
-                type: String,
-                computed: '_computeHasIcon(icon)'
-            },
-            /**
-             * CSS class appended on the `.wrapper` element to identify if this
-             * component is active or not.
-             * @type {String}
-             */
-            _activeClass: {
-                type: String,
-                computed: '_computeActiveClass(active)'
-            }
-        },
-        /**
-         * Computes if component has icon or not based on the existence or lack
-         * of `icon`
-         *
-         * @param {String} icon `kano-icons` icon id.
-         * @return {Boolean}
-         */
-        _computeHasIcon(icon) {
-            return icon ? true : false;
-        },
-        /**
-         * Computes CSS class appended on the `.wrapper` element to identify if
-         * this component is active or not.
-         *
-         * @param {Boolean} active Wether the component is active or not.
-         * @return {String}
-         */
-        _computeActiveClass(active) {
-            return active ? 'active' : 'inactive';
-        },
-        /**
-         * Computes CSS class appended on the `.label-wrapper` element based
-         * on whether the element has an icon or not.
-         *
-         * @param {Boolean} hasIcon Has icon assigned?
-         * @return {String}
-         */
-         _computeLabelContainerClass(hasIcon) {
-            return hasIcon ? 'extra-margin' : '';
-        },
-        /**
-         * Toggles active state of the button.
-         *
-         * @return {Boolean}
-         */
-        toggleActive() {
-            this.active = !this.active;
-            return this.active;
-        }
-    });
-    </script>
-</dom-module>
+  is: 'kwc-share-action',
+
+  properties: {
+      /**
+       * Icon id from `kano-icons` to be displayed
+       * @type {String}
+       */
+      icon: {
+          type: String,
+          value: null
+      },
+      /**
+       * Flags if this component is active or not. Active mostly means
+       * the icon will be coloured and the text (inside the slot) will be
+       * darker.
+       * @type {Boolean}
+       */
+      active: {
+          type: Boolean,
+          value: false
+      },
+      /**
+       * Flags if component has icon based on the existence or lack of
+       * `icon`
+       * @type {Boolean}
+       */
+      _hasIcon: {
+          type: String,
+          computed: '_computeHasIcon(icon)'
+      },
+      /**
+       * CSS class appended on the `.wrapper` element to identify if this
+       * component is active or not.
+       * @type {String}
+       */
+      _activeClass: {
+          type: String,
+          computed: '_computeActiveClass(active)'
+      }
+  },
+
+  /**
+   * Computes if component has icon or not based on the existence or lack
+   * of `icon`
+   *
+   * @param {String} icon `kano-icons` icon id.
+   * @return {Boolean}
+   */
+  _computeHasIcon(icon) {
+      return icon ? true : false;
+  },
+
+  /**
+   * Computes CSS class appended on the `.wrapper` element to identify if
+   * this component is active or not.
+   *
+   * @param {Boolean} active Wether the component is active or not.
+   * @return {String}
+   */
+  _computeActiveClass(active) {
+      return active ? 'active' : 'inactive';
+  },
+
+  /**
+   * Computes CSS class appended on the `.label-wrapper` element based
+   * on whether the element has an icon or not.
+   *
+   * @param {Boolean} hasIcon Has icon assigned?
+   * @return {String}
+   */
+  _computeLabelContainerClass(hasIcon) {
+     return hasIcon ? 'extra-margin' : '';
+ },
+
+  /**
+   * Toggles active state of the button.
+   *
+   * @return {Boolean}
+   */
+  toggleActive() {
+      this.active = !this.active;
+      return this.active;
+  }
+});
