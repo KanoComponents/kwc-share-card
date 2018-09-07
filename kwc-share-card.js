@@ -41,6 +41,7 @@ Polymer({
                 border-radius: 100%;
                 border: 4px solid white;
                 cursor: pointer;
+                background: #5A6675;
             }
             .title,
             .username {
