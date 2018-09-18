@@ -11,6 +11,7 @@ Display a creation made with Kano Code.
 */
 import '@polymer/polymer/polymer-legacy.js';
 
+import '@polymer/paper-spinner/paper-spinner.js';
 import '@polymer/iron-image/iron-image.js';
 import '@kano/kwc-style/kwc-style.js';
 import './assets/svgs.js';
@@ -38,10 +39,23 @@ Polymer({
                 left: 16px;
                 height: 40px;
                 width: 40px;
-                border-radius: 100%;
                 border: 4px solid white;
                 cursor: pointer;
                 background: #5A6675;
+                border-radius: 50%;
+                transition: transform 350ms ease-in-out;
+                will-change: transform;
+            }
+            .spinner {
+                position: absolute;
+                bottom: -10px;
+                left: 16px;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                border: 4px solid white;
+                cursor: pointer;
+                background: white;
             }
             .title,
             .username {
@@ -96,7 +110,8 @@ Polymer({
         <div class="wrapper">
             <div class="cover">
                 <slot name="cover"></slot>
-                <img class="avatar" on-tap="_onTapAvatar" src="[[_avatar]]">
+                <paper-spinner class="spinner" active hidden$="[[!uploadingAvatar]]"></paper-spinner>
+                <iron-image class="avatar" on-tap="_onTapAvatar" src$="[[_avatar]]" sizing="contain" hidden$="[[uploadingAvatar]]"></iron-image>
             </div>
             <div class="title" on-tap="_onTapTitle">
                 <div class="title-text">[[title]]</div>
@@ -119,6 +134,9 @@ Polymer({
   is: 'kwc-share-card',
 
   properties: {
+      user: {
+          type: Object,
+      },
       username: {
           type: String,
       },
@@ -130,6 +148,9 @@ Polymer({
       },
       avatar: {
           type: Object,
+      },
+      uploadingAvatar: {
+          type: Boolean,
       },
       /**
        * Image to fallback in case user doesn't have an avatar.
@@ -144,7 +165,7 @@ Polymer({
        */
       _avatar: {
           type: String,
-          computed: '_computeAvatar(avatar.urls.world, avatar.urls.circle)',
+          computed: '_computeAvatar(avatar.urls.world, avatar.urls.circle, user.*)',
       },
       /**
        * Computed date for share creation
@@ -162,9 +183,11 @@ Polymer({
    * @param {String} avatar Share's creator avatar.
    * @return {String}
    */
-  _computeAvatar(worldAvatar, circleAvatar) {
+  _computeAvatar(worldAvatar, circleAvatar, user) {
       if (worldAvatar) {
           return worldAvatar;
+      } else if (user.base && this.username === user.base.username) {
+          return user.base.avatar;
       } else if (circleAvatar) {
           return circleAvatar;
       } else {
