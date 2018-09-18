@@ -137,9 +137,6 @@ Polymer({
       user: {
           type: Object,
       },
-      userId: {
-          type: String,
-      },
       username: {
           type: String,
       },
