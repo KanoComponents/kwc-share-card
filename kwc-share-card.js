@@ -120,7 +120,7 @@ Polymer({
                 <div class="title-icon"><slot name="title-icon"></slot></div>
             </div>
             <div class="username" on-tap="_onTapUsername">
-                by <span class="username-text"> [[username]]</span> [[_date]] ago
+                by <span class="username-text"> [[username]]</span> [[_timeSince(date)]] ago
             </div>
             <div id="actions">
                 <slot name="actions"></slot>
@@ -167,14 +167,6 @@ Polymer({
           type: String,
           computed: '_computeAvatar(avatar.urls.world, avatar.urls.circle, user.*)',
       },
-      /**
-       * Computed date for share creation
-       * @type {String}
-       */
-      _date: {
-          type: String,
-          computed: '_convertDate(date)',
-      }
   },
 
   /**
@@ -230,38 +222,34 @@ Polymer({
   /**
   * Computes the day/time a share was created
   */
-  _convertDate(dateCreated) {
-      dateCreated = new Date(dateCreated);
-      let dateNow = new Date(),
-          dateDifference = dateNow - dateCreated,
-          dateInSeconds = Math.floor(dateDifference / 1000),
-          dateInMinutes = Math.floor(dateInSeconds / 60),
-          dateInHours = Math.floor(dateInMinutes / 60),
-          dateInDays = Math.floor(dateInHours / 24),
-          dateInWeeks = Math.floor(dateInDays / 7),
-          dateInMonths = Math.floor(dateInDays / 30),
-          dateInYears = Math.floor(dateInDays / 365);
-      if (dateInSeconds < 60) {
-          return this.dateLabel(dateInSeconds, 'second');
-      } else if (dateInMinutes < 60) {
-          return this.dateLabel(dateInMinutes, 'minute');
-      } else if (dateInHours < 24) {
-          return this.dateLabel(dateInHours, 'hour');
-      } else if (dateInDays < 7) {
-          return this.dateLabel(dateInDays, 'day');
-      } else if (dateInDays < 30) {
-          return this.dateLabel(dateInWeeks, 'week');
-      } else if (dateInDays > 30 && dateInDays < 365) {
-          return this.dateLabel(dateInMonths, 'month');
-      } else if (dateInDays > 365) {
-          return this.dateLabel(dateInYears, 'year');
+  _timeSince(date) {
+      const parsedDate = new Date(date);
+      const seconds = Math.floor((new Date() - parsedDate) / 1000) + (new Date().getTimezoneOffset()/60 * 3600);
+      let interval = Math.floor(seconds / 31536000);
+      if (interval >= 1) {
+          return this.multipleCheck(interval, 'year');
       }
+      interval = Math.floor(seconds / 2592000);
+      if (interval >= 1) {
+          return this.multipleCheck(interval, 'month');
+      }
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) {
+          return this.multipleCheck(interval, 'day');
+      }
+      interval = Math.floor(seconds / 3600);
+      if (interval >= 1) {
+          return this.multipleCheck(interval, 'hour');
+      }
+      interval = Math.floor(seconds / 60);
+      if (interval >= 1) {
+          return this.multipleCheck(interval, 'minute');
+      }
+      return Math.floor(seconds) + ' seconds';
   },
 
-  dateLabel(dateInUnitTime, unit) {
-    let label;
-    label = dateInUnitTime + ` ${unit}`;
-    dateInUnitTime === 1 ? label : label = label + 's';
-    return label;
+  multipleCheck(interval, unit) {
+      const baseDate = `${interval} ${unit}`;
+      return interval === 1 ? baseDate : `${baseDate}s`;
   }
 });
