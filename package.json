@@ -1,7 +1,7 @@
 {
   "description": "Displays a creation made with Kano Code.",
   "name": "@kano/kwc-share-card",
-  "version": "3.0.0-beta.8",
+  "version": "3.0.0-beta.9",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
