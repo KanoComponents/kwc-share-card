@@ -223,8 +223,9 @@ Polymer({
   * Computes the day/time a share was created
   */
   _timeSince(date) {
-      const parsedDate = new Date(date);
-      const seconds = Math.floor((new Date() - parsedDate) / 1000) + (new Date().getTimezoneOffset()/60 * 3600);
+      const UTCDate = date + 'Z';
+      const parsedDate = new Date(Date.parse(UTCDate));
+      const seconds = Math.floor((new Date() - parsedDate) / 1000);
       let interval = Math.floor(seconds / 31536000);
       if (interval >= 1) {
           return this.multipleCheck(interval, 'year');
