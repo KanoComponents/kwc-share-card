@@ -112,7 +112,7 @@ class KwcShareAction extends PolymerElement {
         </style>
         <div class$="wrapper [[_computeActiveClass(active)]]">
             <div class="icon-container"><slot name="icon"></slot></div>
-            <div class$="label-container"><slot id="slot"></slot></div>
+            <div class="label-container"><slot id="slot"></slot></div>
         </div>
 `;
     }
