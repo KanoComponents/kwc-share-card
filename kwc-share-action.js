@@ -25,8 +25,9 @@ Custom property | Description | Default
 @demo demo/index-action.html
 */
 
-import '@kano/kwc-style/kwc-style.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import '@kano/styles/typography.js'
+import '@kano/styles/color.js'
 
 class KwcShareAction extends PolymerElement {
     static get template() {

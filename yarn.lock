@@ -41,12 +41,10 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@kano/kwc-style@3.0.0-beta.2":
-  version "3.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@kano/kwc-style/-/kwc-style-3.0.0-beta.2.tgz#350947eefe1278658ae138646e961b13290e9057"
-  integrity sha1-NQlH7v4SeGWK4ThkbpYbEykOkFc=
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
+"@kano/styles@^1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@kano/styles/-/styles-1.0.0-alpha.0.tgz#cce594e4938c5bcf49115f6da1b057bce0505c13"
+  integrity sha512-/YYry6/l/Z/tfNAoG2ZkWfnIftLkR/qCG7HRTKXGw8GvZAamRANauEbSFUjpTPX8dKoe7xIfRCP2ZNffswZFLw==
 
 "@kano/web-tester@^1.0.0-alpha.6":
   version "1.0.0-alpha.6"
@@ -77,10 +75,10 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/iron-image@^3.0.0-pre.18":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-image/-/iron-image-3.0.0.tgz#ae34bde394e09d05a11e0fbc9e5c8794a55a9587"
-  integrity sha512-2bV2twmWS1oEj+K5vjngzTEbV1HqRp9x+3inzshSKX7ljVvwltHVhniQBl1gmb6/WbWFqkImWP+/Ozobsiua3g==
+"@polymer/iron-image@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@polymer/iron-image/-/iron-image-3.0.1.tgz#c5456d65733879ab0aaed75fbc26419db79cbe5d"
+  integrity sha512-Tp6iB/7YYo6IwmVnxHgctKJXjlE6KcHtja+BvyKq7Du+9JB8XgZ2D+WZTYofagwQJ5Akl4oFis5gtO+LM9Z4dA==
   dependencies:
     "@polymer/polymer" "^3.0.0"
 

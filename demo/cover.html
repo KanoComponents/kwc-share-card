@@ -94,8 +94,9 @@
         <h3>Same size covers</h3>
         <style is="custom-style">
             .wrapper {
-                @apply --layout-horizontal;
-                @apply --layout-wrap;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
             }
 
             kwc-share-cover.small {

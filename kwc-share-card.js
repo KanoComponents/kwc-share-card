@@ -6,8 +6,9 @@ Display a creation made with Kano Code.
 */
 import '@polymer/paper-spinner/paper-spinner.js';
 import '@polymer/iron-image/iron-image.js';
-import '@kano/kwc-style/kwc-style.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import '@kano/styles/typography.js';
+import '@kano/styles/color.js';
 
 class KwcShareCard extends PolymerElement {
     static get template() {
@@ -68,13 +69,15 @@ class KwcShareCard extends PolymerElement {
                 line-height: 26px;
                 margin-bottom: 8px;
                 font-weight: bold;
-                @apply --layout-horizontal;
+                display: flex;
+                flex-direction: row;
             }
             .title .title-text {
                 margin-right: auto;
             }
             .title .title-icon {
-                @apply --layout-end;
+                display: flex;
+                align-items: flex-end;
             }
             .username {
                 font-size: 16px;
