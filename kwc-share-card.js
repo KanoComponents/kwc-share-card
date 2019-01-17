@@ -4,21 +4,14 @@ Display a creation made with Kano Code.
 
 @demo demo/index-card.html
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
 import '@polymer/paper-spinner/paper-spinner.js';
 import '@polymer/iron-image/iron-image.js';
 import '@kano/kwc-style/kwc-style.js';
-import './assets/svgs.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-Polymer({
-  _template: html`
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+
+class KwcShareCard extends PolymerElement {
+    static get template() {
+        return html`
         <style>
             :host *[hidden] {
                 display: none !important;
@@ -129,128 +122,124 @@ Polymer({
                 <slot name="details"></slot>
             </div>
         </div>
-`,
+`;
+    }
+    static get properties() {
+        return {
+            user: {
+                type: Object,
+            },
+            username: {
+                type: String,
+            },
+            title: {
+                type: String,
+            },
+            date: {
+                type: String,
+            },
+            avatar: {
+                type: Object,
+            },
+            uploadingAvatar: {
+                type: Boolean,
+            },
+            /**
+             * Image to fallback in case user doesn't have an avatar.
+             * @type {String}
+             */
+            defaultAvatar: {
+                type: String,
+            },
+            /**
+             * Computed source (`src`) data for the avatar to be displayed.
+             * @type {String}
+             */
+            _avatar: {
+                type: String,
+                computed: '_computeAvatar(avatar.urls.world, avatar.urls.circle, user.*)',
+            },
+        };
+    }
+    /**
+     * Computes which avatar source (`src`) to be used. If user has
+     * an avatar use it, otherwise fallback to the `defaultAvatar`.
+     * @param {String} avatar Share's creator avatar.
+     * @return {String}
+     */
+    _computeAvatar(worldAvatar, circleAvatar, user) {
+        if (worldAvatar) {
+            return worldAvatar;
+        } else if (user.base && this.username === user.base.username) {
+            return user.base.avatar;
+        } else if (circleAvatar) {
+            return circleAvatar;
+        } else {
+            return this.defaultAvatar;
+        }
+    }
+    /**
+     * Fired when avatar is tapped
+     *
+     * @event avatar-tapped
+     * @param {Object} user User who created the tapped avatar.
+     */
+    /**
+     * Handles tap event on the avatar and fires `avatar-tapped`
+     */
+    _onTapAvatar() {
+        this.fire('avatar-tapped');
+    }
+    /**
+     * Handles tap event on the avatar and fires `avatar-tapped`
+     */
+    _onTapUsername() {
+        this.fire('username-tapped');
+    }
+    /**
+     * Fired when share title is tapped
+     *
+     * @event title-tapped
+     */
+    /**
+     * Handles tap event on the title and fires `title-tapped`
+     */
+    _onTapTitle() {
+        this.fire('title-tapped');
+    }
+    /**
+    * Computes the day/time a share was created
+    */
+    _timeSince(date) {
+        const UTCDate = /Z$/.test(date) ? date : date + 'Z';
+        const parsedDate = new Date(Date.parse(UTCDate));
+        const seconds = Math.floor((new Date() - parsedDate) / 1000);
+        let interval = Math.floor(seconds / 31536000);
+        if (interval >= 1) {
+            return this.multipleCheck(interval, 'year');
+        }
+        interval = Math.floor(seconds / 2592000);
+        if (interval >= 1) {
+            return this.multipleCheck(interval, 'month');
+        }
+        interval = Math.floor(seconds / 86400);
+        if (interval >= 1) {
+            return this.multipleCheck(interval, 'day');
+        }
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+            return this.multipleCheck(interval, 'hour');
+        }
+        interval = Math.floor(seconds / 60);
+        if (interval >= 1) {
+            return this.multipleCheck(interval, 'minute');
+        }
+        return Math.floor(seconds) + ' seconds';
+    }
+    multipleCheck(interval, unit) {
+        const baseDate = `${interval} ${unit}`;
+        return interval === 1 ? baseDate : `${baseDate}s`;
+    }
+}
 
-  is: 'kwc-share-card',
-
-  properties: {
-      user: {
-          type: Object,
-      },
-      username: {
-          type: String,
-      },
-      title: {
-          type: String,
-      },
-      date: {
-          type: String,
-      },
-      avatar: {
-          type: Object,
-      },
-      uploadingAvatar: {
-          type: Boolean,
-      },
-      /**
-       * Image to fallback in case user doesn't have an avatar.
-       * @type {String}
-       */
-      defaultAvatar: {
-          type: String,
-      },
-      /**
-       * Computed source (`src`) data for the avatar to be displayed.
-       * @type {String}
-       */
-      _avatar: {
-          type: String,
-          computed: '_computeAvatar(avatar.urls.world, avatar.urls.circle, user.*)',
-      },
-  },
-
-  /**
-   * Computes which avatar source (`src`) to be used. If user has
-   * an avatar use it, otherwise fallback to the `defaultAvatar`.
-   * @param {String} avatar Share's creator avatar.
-   * @return {String}
-   */
-  _computeAvatar(worldAvatar, circleAvatar, user) {
-      if (worldAvatar) {
-          return worldAvatar;
-      } else if (user.base && this.username === user.base.username) {
-          return user.base.avatar;
-      } else if (circleAvatar) {
-          return circleAvatar;
-      } else {
-          return this.defaultAvatar;
-      }
-  },
-
-  /**
-   * Fired when avatar is tapped
-   *
-   * @event avatar-tapped
-   * @param {Object} user User who created the tapped avatar.
-   */
-  /**
-   * Handles tap event on the avatar and fires `avatar-tapped`
-   */
-  _onTapAvatar() {
-      this.fire('avatar-tapped');
-  },
-
-  /**
-   * Handles tap event on the avatar and fires `avatar-tapped`
-   */
-  _onTapUsername() {
-      this.fire('username-tapped');
-  },
-
-  /**
-   * Fired when share title is tapped
-   *
-   * @event title-tapped
-   */
-  /**
-   * Handles tap event on the title and fires `title-tapped`
-   */
-  _onTapTitle() {
-      this.fire('title-tapped');
-  },
-
-  /**
-  * Computes the day/time a share was created
-  */
-  _timeSince(date) {
-      const UTCDate = date + 'Z';
-      const parsedDate = new Date(Date.parse(UTCDate));
-      const seconds = Math.floor((new Date() - parsedDate) / 1000);
-      let interval = Math.floor(seconds / 31536000);
-      if (interval >= 1) {
-          return this.multipleCheck(interval, 'year');
-      }
-      interval = Math.floor(seconds / 2592000);
-      if (interval >= 1) {
-          return this.multipleCheck(interval, 'month');
-      }
-      interval = Math.floor(seconds / 86400);
-      if (interval >= 1) {
-          return this.multipleCheck(interval, 'day');
-      }
-      interval = Math.floor(seconds / 3600);
-      if (interval >= 1) {
-          return this.multipleCheck(interval, 'hour');
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval >= 1) {
-          return this.multipleCheck(interval, 'minute');
-      }
-      return Math.floor(seconds) + ' seconds';
-  },
-
-  multipleCheck(interval, unit) {
-      const baseDate = `${interval} ${unit}`;
-      return interval === 1 ? baseDate : `${baseDate}s`;
-  }
-});
+customElements.define('kwc-share-card', KwcShareCard);

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>kwc-share-card demo</title>
+</head>
+
+<body>
+    <div class="vertical-section-container centered">
+        <h3>Basic kwc-share-card demo</h3>
+        <style is="custom-style">
+            kwc-share-action[action="like"] {
+                --kwc-share-action-icon-color: var(--color-carnation);
+            }
+            kwc-share-action[action="comment"] {
+                --kwc-share-action-icon-color: var(--color-azure);
+            }
+            kwc-share-action[action="custom"] {
+                --kwc-share-action-icon-color: var(--color-kano-orange);
+            }
+            iron-icon.title-icon {
+                width: 20px;
+                height: 20px;
+            }
+            .actions {
+                @apply --layout-horizontal;
+            }
+            .actions kwc-share-action:first-of-type {
+                margin-left: 0px;
+            }
+            .actions kwc-share-action {
+                margin-left: 10px;
+            }
+        </style>
+
+        <kwc-share-card id="share-card" title="Kevin86's Goes to the MOON" username="Kevin86" date="2017-05-23T10:48:21.053Z">
+            <iron-image slot="cover" style="width: 100%; height: 192px;" src="https://hoc-staging.kano.me/assets/images/build_challenges/orbit_moon.svg"
+                sizing="cover" preload fade>
+            </iron-image>
+            <iron-icon slot="title-icon" class="icon title-icon" icon="kwc-ui-icons:user"></iron-icon>
+            <kwc-share-action id="like" slot="actions" active="" icon="kwc-ui-icons:like">Like</kwc-share-action>
+            <kwc-share-action id="comment" slot="actions" icon="kwc-ui-icons:comment">Comment</kwc-share-action>
+            <kwc-share-action id="custom" slot="actions">
+                <iron-icon class="icon" icon="kwc-ui-icons:medal"></iron-icon>Custom
+            </kwc-share-action>
+        </kwc-share-card>
+    </div>
+    <script type="module">
+        import '@polymer/iron-image/iron-image.js';
+        import '@polymer/iron-icon/iron-icon.js';
+        import '@kano/kwc-icons/kwc-icons.js';
+        import '../kwc-share-card.js';
+        import '../kwc-share-action.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const avatar = {
+                urls: {
+                    circle: 'https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-circle.png',
+                    landscape: 'https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-landscape.png',
+                    character: 'https://s3-eu-west-1.amazonaws.com/world.kano.me/users/avatars/568ba6fb26c95db40e5af0e6/avatar-character.png',
+                },
+            };
+            const shareCard = document.querySelector('#share-card');
+            const likeAction = document.querySelector('#share-card #like');
+            const commentAction = document.querySelector('#share-card #comment');
+            const customAction = document.querySelector('#share-card #custom');
+
+            shareCard.set('avatar', avatar);
+            likeAction.addEventListener('click', (e) => {
+                console.log('demo', 'liked');
+            });
+            commentAction.addEventListener('click', (e) => {
+                console.log('demo', 'comment');
+            });
+            customAction.addEventListener('click', (e) => {
+                console.log('demo', 'custom');
+            });
+            shareCard.addEventListener('avatar-tapped', (e) => {
+                console.log('demo', 'avatar tapped');
+            });
+            shareCard.addEventListener('title-tapped', (e) => {
+                console.log('demo', 'title tapped');
+            });
+            shareCard.addEventListener('username-tapped', (e) => {
+                console.log('demo', 'username tapped');
+            });
+        });
+    </script>
+</body>
+
+</html>

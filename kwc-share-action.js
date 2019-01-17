@@ -24,20 +24,15 @@ Custom property | Description | Default
 
 @demo demo/index-action.html
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
 
 import '@polymer/iron-icon/iron-icon.js';
 import '@kano/kwc-icons/kwc-icons.js';
 import '@kano/kwc-style/kwc-style.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
-Polymer({
-    _template: html`
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+
+class KwcShareAction extends PolymerElement {
+    static get template() {
+        return html`
         <style>
             :host {
                 display: block;
@@ -116,57 +111,56 @@ Polymer({
                 color: var(--kwc-share-action-label-active-hover-color, var(--kwc-share-action-label-active-color));
             }
         </style>
-        <div class\$="wrapper [[_activeClass]]">
+        <div class$="wrapper [[_activeClass]]">
             <div class="icon-container">
                 <template is="dom-if" if="[[_hasIcon]]">
                     <iron-icon class="icon" icon="[[icon]]"></iron-icon>
                 </template>
             </div>
-            <div class\$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
+            <div class$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
         </div>
-`,
-
-    is: 'kwc-share-action',
-
-    properties: {
-        /**
-         * Icon id from `kano-icons` to be displayed
-         * @type {String}
-         */
-        icon: {
-            type: String,
-            value: null
-        },
-        /**
-         * Flags if this component is active or not. Active mostly means
-         * the icon will be coloured and the text (inside the slot) will be
-         * darker.
-         * @type {Boolean}
-         */
-        active: {
-            type: Boolean,
-            value: false
-        },
-        /**
-         * Flags if component has icon based on the existence or lack of
-         * `icon`
-         * @type {Boolean}
-         */
-        _hasIcon: {
-            type: String,
-            computed: '_computeHasIcon(icon)'
-        },
-        /**
-         * CSS class appended on the `.wrapper` element to identify if this
-         * component is active or not.
-         * @type {String}
-         */
-        _activeClass: {
-            type: String,
-            computed: '_computeActiveClass(active)'
-        }
-    },
-
+`;
+    }
+    static get properties() {
+        return {
+            /**
+             * Icon id from `kano-icons` to be displayed
+             * @type {String}
+             */
+            icon: {
+                type: String,
+                value: null
+            },
+            /**
+             * Flags if this component is active or not. Active mostly means
+             * the icon will be coloured and the text (inside the slot) will be
+             * darker.
+             * @type {Boolean}
+             */
+            active: {
+                type: Boolean,
+                value: false
+            },
+            /**
+             * Flags if component has icon based on the existence or lack of
+             * `icon`
+             * @type {Boolean}
+             */
+            _hasIcon: {
+                type: String,
+                computed: '_computeHasIcon(icon)'
+            },
+            /**
+             * CSS class appended on the `.wrapper` element to identify if this
+             * component is active or not.
+             * @type {String}
+             */
+            _activeClass: {
+                type: String,
+                computed: '_computeActiveClass(active)'
+            }
+        };
+    }
     /**
      * Computes if component has icon or not based on the existence or lack
      * of `icon`
@@ -176,8 +170,7 @@ Polymer({
      */
     _computeHasIcon(icon) {
         return icon ? true : false;
-    },
-
+    }
     /**
      * Computes CSS class appended on the `.wrapper` element to identify if
      * this component is active or not.
@@ -187,8 +180,7 @@ Polymer({
      */
     _computeActiveClass(active) {
         return active ? 'active' : 'inactive';
-    },
-
+    }
     /**
      * Computes CSS class appended on the `.label-wrapper` element based
      * on whether the element has an icon or not.
@@ -198,8 +190,7 @@ Polymer({
      */
     _computeLabelContainerClass(hasIcon) {
         return hasIcon ? 'extra-margin' : '';
-    },
-
+    }
     /**
      * Toggles active state of the button.
      *
@@ -209,4 +200,6 @@ Polymer({
         this.active = !this.active;
         return this.active;
     }
-});
+}
+
+customElements.define('kwc-share-action', KwcShareAction);
