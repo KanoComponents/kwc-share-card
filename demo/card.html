@@ -21,10 +21,6 @@
             kwc-share-action[action="custom"] {
                 --kwc-share-action-icon-color: var(--color-kano-orange);
             }
-            iron-icon.title-icon {
-                width: 20px;
-                height: 20px;
-            }
             .actions {
                 @apply --layout-horizontal;
             }
@@ -40,18 +36,14 @@
             <iron-image slot="cover" style="width: 100%; height: 192px;" src="https://hoc-staging.kano.me/assets/images/build_challenges/orbit_moon.svg"
                 sizing="cover" preload fade>
             </iron-image>
-            <iron-icon slot="title-icon" class="icon title-icon" icon="kwc-ui-icons:user"></iron-icon>
-            <kwc-share-action id="like" slot="actions" active="" icon="kwc-ui-icons:like">Like</kwc-share-action>
-            <kwc-share-action id="comment" slot="actions" icon="kwc-ui-icons:comment">Comment</kwc-share-action>
-            <kwc-share-action id="custom" slot="actions">
-                <iron-icon class="icon" icon="kwc-ui-icons:medal"></iron-icon>Custom
-            </kwc-share-action>
+            <div slot="title-icon" class="icon title-icon"></div>
+            <kwc-share-action id="like" slot="actions" active>Like</kwc-share-action>
+            <kwc-share-action id="comment" slot="actions">Comment</kwc-share-action>
+            <kwc-share-action id="custom" slot="actions">Custom</kwc-share-action>
         </kwc-share-card>
     </div>
     <script type="module">
         import '@polymer/iron-image/iron-image.js';
-        import '@polymer/iron-icon/iron-icon.js';
-        import '@kano/kwc-icons/kwc-icons.js';
         import '../kwc-share-card.js';
         import '../kwc-share-action.js';
 

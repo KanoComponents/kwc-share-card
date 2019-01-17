@@ -22,6 +22,18 @@
     serve-static "^1.13.2"
     yargs "^12.0.5"
 
+"@kano/icons-rendering@^0.0.1-alpha.1":
+  version "0.0.1-alpha.1"
+  resolved "https://registry.yarnpkg.com/@kano/icons-rendering/-/icons-rendering-0.0.1-alpha.1.tgz#791ca960d242f41908c271c2ce12316bb4b945c5"
+  integrity sha512-9kb6eLe/5Nive+q0w5RPdZKuvI+JxzFT9pHgGY0RJKOxOVC/ni+7HEz48G9PCZIrNgYAt5O25sI4Gr604hF4Dg==
+
+"@kano/icons@^0.0.1-alpha.3":
+  version "0.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/@kano/icons/-/icons-0.0.1-alpha.3.tgz#10dd70121b4c7ffbddcea99f28c40c41377062d9"
+  integrity sha512-BiowDIxy0Ecp7gtrVzBVaU1jF+Mf4+xzOmLbx5xnx+FMSSQhN+6IhacYhoTlGpGUm0SJ1lfse0QP+eCLPMDX9w==
+  dependencies:
+    "@kano/icons-rendering" "^0.0.1-alpha.1"
+
 "@kano/kwc-icons@^3.0.0-beta.3":
   version "3.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@kano/kwc-icons/-/kwc-icons-3.0.0-beta.3.tgz#8ceed30104442c4e8a2bcc79e9a4171bc227200e"

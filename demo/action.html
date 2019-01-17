@@ -9,11 +9,6 @@
 </head>
 
 <body>
-    <script type="module">
-        import '@polymer/iron-icon/iron-icon.js'
-        import '@kano/kwc-icons/kwc-icons.js'
-        import '../kwc-share-action.js';
-    </script>
     <div class="vertical-section-container centered">
         <h3>Basic kwc-share-action demo</h3>
         <style is="custom-style">
@@ -25,15 +20,15 @@
                 margin: 3px;
             }
 
-            kwc-share-action[action="like"] {
+            kwc-share-action.like {
                 --kwc-share-action-icon-active-hover-color: var(--color-carnation);
             }
 
-            kwc-share-action[action="comment"] {
+            kwc-share-action.comment {
                 --kwc-share-action-icon-color: var(--color-azure);
             }
 
-            kwc-share-action[action="custom"] {
+            kwc-share-action.custom {
                 --kwc-share-action-icon-color: var(--color-kano-orange);
             }
 
@@ -47,7 +42,7 @@
                 overflow: hidden;
             }
 
-            .ellipsis iron-icon {
+            .ellipsis svg {
                 width: 30px;
                 height: 30px;
                 margin-top: -4px;
@@ -55,19 +50,31 @@
             }
         </style>
         <div class="wrapper">
-            <kwc-share-action active="" icon="kwc-ui-icons:like">Like</kwc-share-action>
-            <kwc-share-action active="" icon="kwc-ui-icons:remix">Remix</kwc-share-action>
-            <kwc-share-action action="comment" icon="kwc-ui-icons:comment">Comment</kwc-share-action>
-            <kwc-share-action action="custom">
-                <iron-icon class="icon" icon="kwc-ui-icons:medal"></iron-icon>Custom
-            </kwc-share-action>
-            <kwc-share-action action="custom">
-                <div class="ellipsis">
-                    <iron-icon icon="kwc-ui-icons:ellipsis"></iron-icon>
-                </div>
+            <kwc-share-action active class="like"><div slot="icon" id="like"></div>Like</kwc-share-action>
+            <kwc-share-action active><div slot="icon" id="remix"></div>Remix</kwc-share-action>
+            <kwc-share-action class="comment"><div slot="icon" id="comment"></div>Comment</kwc-share-action>
+            <kwc-share-action class="custom">No Icon</kwc-share-action>
+            <kwc-share-action>
+                <div class="ellipsis" id="ellipsis"></div>
             </kwc-share-action>
         </div>
     </div>
+    <script type="module">
+        import '../kwc-share-action.js';
+
+        import { like, remix, comment, ellipsis } from '@kano/icons/ui.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const likeContainer = document.getElementById('like');
+            likeContainer.appendChild(like.content.cloneNode(true));
+            const remixContainer = document.getElementById('remix');
+            remixContainer.appendChild(remix.content.cloneNode(true));
+            const commentContainer = document.getElementById('comment');
+            commentContainer.appendChild(comment.content.cloneNode(true));
+            const ellipsisContainer = document.getElementById('ellipsis');
+            ellipsisContainer.appendChild(ellipsis.content.cloneNode(true));
+        });
+    </script>
 </body>
 
 </html>

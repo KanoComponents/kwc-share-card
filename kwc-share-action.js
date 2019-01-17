@@ -25,8 +25,6 @@ Custom property | Description | Default
 @demo demo/index-action.html
 */
 
-import '@polymer/iron-icon/iron-icon.js';
-import '@kano/kwc-icons/kwc-icons.js';
 import '@kano/kwc-style/kwc-style.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 
@@ -47,8 +45,9 @@ class KwcShareAction extends PolymerElement {
                 padding: 5.6px 15px;
                 background-color: var(--kwc-share-action-wrapper-color, #f6f7f9);
                 border-radius: 34px;
-
-                @apply --layout-horizontal;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
             }
             .label-container {
                 color: var(--kwc-share-action-label-color, var(--color-chateau));
@@ -60,24 +59,12 @@ class KwcShareAction extends PolymerElement {
             .label-container.extra-margin:empty {
                 margin: 0px;
             }
-            .icon,
-            .label-container ::slotted(.icon) {
-                fill: var(--kwc-share-action-icon-color, var(--color-grey));
-                width: 16px;
-                height: 16px;
-                margin-top: -2px;
-            }
-
-            .label-container ::slotted(.icon) {
-                margin-right: 9px;
-            }
 
             /*HOVER STATE*/
             .wrapper:hover {
                 background-color: var(--kwc-share-action-wrapper-hover-color, #e5e8eC);
             }
-            .wrapper:hover .icon,
-            .wrapper:hover .label-container ::slotted(.icon) {
+            .wrapper:hover .icon-container ::slotted(*) {
                 fill: var(--kwc-share-action-icon-hover-color, var(--kwc-share-action-icon-color));
             }
             .wrapper:hover .label-container {
@@ -91,11 +78,10 @@ class KwcShareAction extends PolymerElement {
             .active .label-container {
                 color: var(--kwc-share-action-label-active-color, var(--color-chateau));
             }
-            .active .icon-container .icon {
+            .active .icon-container .icon-container ::slotted(*) {
                 fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
             }
-            .active .icon,
-            .active .label-container ::slotted(.icon) {
+            .active .icon {
                 fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
             }
 
@@ -103,34 +89,34 @@ class KwcShareAction extends PolymerElement {
             .wrapper.active:hover {
                 background-color: var(--kwc-share-action-wrapper-active-hover-color, #e5e8eC);
             }
-            .wrapper.active:hover .icon,
-            .wrapper.active:hover .label-container ::slotted(.icon) {
+            .wrapper.active:hover .icon-container ::slotted(*) {
                 fill: var(--kwc-share-action-icon-active-hover-color, var(--kwc-share-action-icon-active-color));
             }
             .wrapper.active:hover .label-container {
                 color: var(--kwc-share-action-label-active-hover-color, var(--kwc-share-action-label-active-color));
             }
+            .icon-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .icon-container ::slotted(*) {
+                fill: var(--kwc-share-action-icon-color, var(--color-grey));
+                width: 16px;
+                height: 16px;
+                margin-top: -2px;
+                display: inline-block;
+                margin-right: 9px;
+            }
         </style>
         <div class$="wrapper [[_activeClass]]">
-            <div class="icon-container">
-                <template is="dom-if" if="[[_hasIcon]]">
-                    <iron-icon class="icon" icon="[[icon]]"></iron-icon>
-                </template>
-            </div>
-            <div class$="label-container [[_computeLabelContainerClass(_hasIcon)]]"><slot id="slot"></slot></div>
+            <div class="icon-container"><slot name="icon"></slot></div>
+            <div class$="label-container"><slot id="slot"></slot></div>
         </div>
 `;
     }
     static get properties() {
         return {
-            /**
-             * Icon id from `kano-icons` to be displayed
-             * @type {String}
-             */
-            icon: {
-                type: String,
-                value: null
-            },
             /**
              * Flags if this component is active or not. Active mostly means
              * the icon will be coloured and the text (inside the slot) will be
@@ -140,15 +126,6 @@ class KwcShareAction extends PolymerElement {
             active: {
                 type: Boolean,
                 value: false
-            },
-            /**
-             * Flags if component has icon based on the existence or lack of
-             * `icon`
-             * @type {Boolean}
-             */
-            _hasIcon: {
-                type: String,
-                computed: '_computeHasIcon(icon)'
             },
             /**
              * CSS class appended on the `.wrapper` element to identify if this
@@ -162,16 +139,6 @@ class KwcShareAction extends PolymerElement {
         };
     }
     /**
-     * Computes if component has icon or not based on the existence or lack
-     * of `icon`
-     *
-     * @param {String} icon `kano-icons` icon id.
-     * @return {Boolean}
-     */
-    _computeHasIcon(icon) {
-        return icon ? true : false;
-    }
-    /**
      * Computes CSS class appended on the `.wrapper` element to identify if
      * this component is active or not.
      *
@@ -180,16 +147,6 @@ class KwcShareAction extends PolymerElement {
      */
     _computeActiveClass(active) {
         return active ? 'active' : 'inactive';
-    }
-    /**
-     * Computes CSS class appended on the `.label-wrapper` element based
-     * on whether the element has an icon or not.
-     *
-     * @param {Boolean} hasIcon Has icon assigned?
-     * @return {String}
-     */
-    _computeLabelContainerClass(hasIcon) {
-        return hasIcon ? 'extra-margin' : '';
     }
     /**
      * Toggles active state of the button.
