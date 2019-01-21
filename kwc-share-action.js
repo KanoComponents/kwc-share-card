@@ -25,8 +25,9 @@ Custom property | Description | Default
 @demo demo/index-action.html
 */
 
-import '@kano/kwc-style/kwc-style.js';
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import '@kano/styles/typography.js'
+import '@kano/styles/color.js'
 
 class KwcShareAction extends PolymerElement {
     static get template() {
@@ -78,7 +79,7 @@ class KwcShareAction extends PolymerElement {
             .active .label-container {
                 color: var(--kwc-share-action-label-active-color, var(--color-chateau));
             }
-            .active .icon-container .icon-container ::slotted(*) {
+            .active .icon-container ::slotted(*) {
                 fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
             }
             .active .icon {
@@ -109,9 +110,9 @@ class KwcShareAction extends PolymerElement {
                 margin-right: 9px;
             }
         </style>
-        <div class$="wrapper [[_activeClass]]">
+        <div class$="wrapper [[_computeActiveClass(active)]]">
             <div class="icon-container"><slot name="icon"></slot></div>
-            <div class$="label-container"><slot id="slot"></slot></div>
+            <div class="label-container"><slot id="slot"></slot></div>
         </div>
 `;
     }
@@ -127,15 +128,6 @@ class KwcShareAction extends PolymerElement {
                 type: Boolean,
                 value: false
             },
-            /**
-             * CSS class appended on the `.wrapper` element to identify if this
-             * component is active or not.
-             * @type {String}
-             */
-            _activeClass: {
-                type: String,
-                computed: '_computeActiveClass(active)'
-            }
         };
     }
     /**
