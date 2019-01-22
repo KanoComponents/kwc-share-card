@@ -17,31 +17,32 @@
         import '@polymer/iron-image/iron-image.js';
         import { html } from '@polymer/polymer/polymer-element.js';
         import '../kwc-share-card.js';
-        import '../kwc-share-action.js';
         import { like, comment, remix } from '@kano/icons/ui.js';
+        import button from '@kano/styles/button.js';
 
         const tpl = html`
+            ${button}
             <style>
                 fieldset {
                     max-width: 400px;
                 }
-                kwc-share-action#like {
-                    --kwc-share-highlight: var(--color-carnation);
+                #like {
+                    --button-action-highlight: var(--color-carnation);
                 }
-                kwc-share-action#comment {
-                    --kwc-share-highlight: var(--color-azure);
+                #comment {
+                    --button-action-highlight: var(--color-azure);
                 }
-                kwc-share-action#custom {
-                    --kwc-share-highlight: var(--color-kano-orange);
+                #custom {
+                    --button-action-highlight: var(--color-kano-orange);
                 }
                 .actions {
                     display: flex;
                     flex-direction: row;
                 }
-                .actions kwc-share-action:first-of-type {
+                .btn.action:first-of-type {
                     margin-left: 0px;
                 }
-                .actions kwc-share-action {
+                .btn.action {
                     margin-left: 10px;
                 }
             </style>
@@ -53,9 +54,9 @@
                         sizing="cover" preload fade>
                     </iron-image>
                     <div slot="title-icon" class="icon title-icon"></div>
-                    <kwc-share-action id="like" slot="actions" active><div slot="icon">${like}</div>Like</kwc-share-action>
-                    <kwc-share-action id="comment" slot="actions"><div slot="icon">${comment}</div>Comment</kwc-share-action>
-                    <kwc-share-action id="custom" slot="actions"><div slot="icon">${remix}</div>Remix</kwc-share-action>
+                    <button class="btn action active" id="like" slot="actions">${like}<div>Like</div></button>
+                    <button class="btn action" id="comment" slot="actions">${comment}<div>Comment</div></button>
+                    <button class="btn action" id="custom" slot="actions">${remix}<div>Remix</div></button>
                 </kwc-share-card>
             </fieldset>
         `;

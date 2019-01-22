@@ -41,10 +41,10 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@kano/styles@^1.0.0-alpha.0":
-  version "1.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@kano/styles/-/styles-1.0.0-alpha.0.tgz#cce594e4938c5bcf49115f6da1b057bce0505c13"
-  integrity sha512-/YYry6/l/Z/tfNAoG2ZkWfnIftLkR/qCG7HRTKXGw8GvZAamRANauEbSFUjpTPX8dKoe7xIfRCP2ZNffswZFLw==
+"@kano/styles@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@kano/styles/-/styles-1.0.0.tgz#f7d0ef9338dcc73c72851dc931c79eefd3db9bbf"
+  integrity sha512-Iu9vr3mY3SEZYUjvDNSpPiuvEfF4TbGJAEPkmGTYJ9xATlDDTvZCsogCBkr19LLbzvTGzREXKQgNpFySX4kf9g==
 
 "@kano/web-tester@^1.0.0-alpha.6":
   version "1.0.0-alpha.6"

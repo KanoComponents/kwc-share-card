@@ -7,11 +7,12 @@
     "serve": "es6-server",
     "serve-test": "web-tester serve ./**/*.test.js",
     "test": "web-tester run ./**/*.test.js",
-    "test-ci": "yarn run --silent test > test-results.xml"
+    "test-ci": "yarn run --silent test > test-results.xml",
+    "prepublishOnly": "yarn test"
   },
   "dependencies": {
     "@kano/kwc-lightboard-preview": "3.0.0",
-    "@kano/styles": "^1.0.0-alpha.0",
+    "@kano/styles": "^1.0.0",
     "@polymer/iron-image": "^3.0.1",
     "@polymer/paper-spinner": "^3.0.1",
     "@polymer/polymer": "^3.0.0"
