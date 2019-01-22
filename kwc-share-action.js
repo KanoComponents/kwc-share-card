@@ -28,10 +28,12 @@ Custom property | Description | Default
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@kano/styles/typography.js'
 import '@kano/styles/color.js'
+import { button } from '@kano/styles/button.js'
 
 class KwcShareAction extends PolymerElement {
     static get template() {
         return html`
+        ${button}
         <style>
             :host {
                 display: block;
@@ -39,19 +41,21 @@ class KwcShareAction extends PolymerElement {
                 cursor: var(--kwc-share-action-host-cursor, pointer);
                 font-size: 16px;
                 font-weight: bold;
+                --kwc-share-action-background: #f6f7f9;
+                --kwc-share-action-background-hover: #e5e8eC;
+                --kwc-share-highlight: red;
             }
 
             /*DEFAULT STATE*/
             .wrapper {
-                padding: 5.6px 15px;
-                background-color: var(--kwc-share-action-wrapper-color, #f6f7f9);
-                border-radius: 34px;
+                background-color: var(--kwc-share-action-background);
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                align-items: center;
             }
             .label-container {
-                color: var(--kwc-share-action-label-color, var(--color-chateau));
+                color: var(--color-chateau);
             }
             .label-container.extra-margin {
                 margin-left: 9px;
@@ -62,58 +66,47 @@ class KwcShareAction extends PolymerElement {
             }
 
             /*HOVER STATE*/
-            .wrapper:hover {
-                background-color: var(--kwc-share-action-wrapper-hover-color, #e5e8eC);
+            .wrapper:hover,
+            .wrapper:focus {
+                background-color: var(--kwc-share-action-background-hover);
             }
-            .wrapper:hover .icon-container ::slotted(*) {
-                fill: var(--kwc-share-action-icon-hover-color, var(--kwc-share-action-icon-color));
+            .wrapper:hover .icon-container ::slotted(*),
+            .wrapper:focus .icon-container ::slotted(*) {
+                fill: var(--kwc-share-highlight);
             }
-            .wrapper:hover .label-container {
-                color: var(--kwc-share-action-label-hover-color, var(--kwc-share-action-label-color));
+            .wrapper:hover .label-container,
+            .wrapper:focus .label-container {
+                color: var(--color-chateau);
             }
 
-            /*ACTIVE STATE*/
+            /* ACTIVE */
             .wrapper.active {
-                background-color: var(--kwc-share-action-wrapper-active-color, #e5e8eC);
+                background-color: var(--kwc-share-highlight);
             }
-            .active .label-container {
-                color: var(--kwc-share-action-label-active-color, var(--color-chateau));
+            .wrapper.active .icon-container ::slotted(*) {
+                fill: white;
             }
-            .active .icon-container ::slotted(*) {
-                fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
-            }
-            .active .icon {
-                fill: var(--kwc-share-action-icon-active-color, var(--color-grey));
+            .wrapper.active .label-container {
+                color: white;
             }
 
-            /*ACTIVE HOVER STATE*/
-            .wrapper.active:hover {
-                background-color: var(--kwc-share-action-wrapper-active-hover-color, #e5e8eC);
-            }
-            .wrapper.active:hover .icon-container ::slotted(*) {
-                fill: var(--kwc-share-action-icon-active-hover-color, var(--kwc-share-action-icon-active-color));
-            }
-            .wrapper.active:hover .label-container {
-                color: var(--kwc-share-action-label-active-hover-color, var(--kwc-share-action-label-active-color));
-            }
             .icon-container {
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
             .icon-container ::slotted(*) {
-                fill: var(--kwc-share-action-icon-color, var(--color-grey));
+                fill: var(--color-grey);
                 width: 16px;
                 height: 16px;
-                margin-top: -2px;
-                display: inline-block;
                 margin-right: 9px;
+                margin-top: -50%;
             }
         </style>
-        <div class$="wrapper [[_computeActiveClass(active)]]">
+        <button class$="btn wrapper [[_computeActiveClass(active)]]">
             <div class="icon-container"><slot name="icon"></slot></div>
             <div class="label-container"><slot id="slot"></slot></div>
-        </div>
+        </button>
 `;
     }
     static get properties() {

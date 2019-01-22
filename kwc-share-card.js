@@ -14,6 +14,9 @@ class KwcShareCard extends PolymerElement {
     static get template() {
         return html`
         <style>
+            :host {
+                display: block;
+            }
             :host *[hidden] {
                 display: none !important;
             }
@@ -100,6 +103,9 @@ class KwcShareCard extends PolymerElement {
             #actions {
                 display: flex;
                 flex-direction: row;
+            }
+            #actions ::slotted(kwc-share-action) {
+                margin-right: 8px;
             }
         </style>
 

@@ -11,42 +11,56 @@
 <body>
     <div class="vertical-section-container centered">
         <h3>Basic kwc-share-card demo</h3>
-        <style is="custom-style">
-            kwc-share-action[action="like"] {
-                --kwc-share-action-icon-color: var(--color-carnation);
-            }
-            kwc-share-action[action="comment"] {
-                --kwc-share-action-icon-color: var(--color-azure);
-            }
-            kwc-share-action[action="custom"] {
-                --kwc-share-action-icon-color: var(--color-kano-orange);
-            }
-            .actions {
-                display: flex;
-                flex-direction: row;
-            }
-            .actions kwc-share-action:first-of-type {
-                margin-left: 0px;
-            }
-            .actions kwc-share-action {
-                margin-left: 10px;
-            }
-        </style>
-
-        <kwc-share-card id="share-card" title="Kevin86's Goes to the MOON" username="Kevin86" date="2017-05-23T10:48:21.053Z">
-            <iron-image slot="cover" style="width: 100%; height: 192px;" src="https://hoc-staging.kano.me/assets/images/build_challenges/orbit_moon.svg"
-                sizing="cover" preload fade>
-            </iron-image>
-            <div slot="title-icon" class="icon title-icon"></div>
-            <kwc-share-action id="like" slot="actions" active>Like</kwc-share-action>
-            <kwc-share-action id="comment" slot="actions">Comment</kwc-share-action>
-            <kwc-share-action id="custom" slot="actions">Custom</kwc-share-action>
-        </kwc-share-card>
+        
     </div>
     <script type="module">
         import '@polymer/iron-image/iron-image.js';
+        import { html } from '@polymer/polymer/polymer-element.js';
         import '../kwc-share-card.js';
         import '../kwc-share-action.js';
+        import { like, comment, remix } from '@kano/icons/ui.js';
+
+        const tpl = html`
+            <style>
+                fieldset {
+                    max-width: 400px;
+                }
+                kwc-share-action#like {
+                    --kwc-share-highlight: var(--color-carnation);
+                }
+                kwc-share-action#comment {
+                    --kwc-share-highlight: var(--color-azure);
+                }
+                kwc-share-action#custom {
+                    --kwc-share-highlight: var(--color-kano-orange);
+                }
+                .actions {
+                    display: flex;
+                    flex-direction: row;
+                }
+                .actions kwc-share-action:first-of-type {
+                    margin-left: 0px;
+                }
+                .actions kwc-share-action {
+                    margin-left: 10px;
+                }
+            </style>
+
+            <fieldset>
+                <legend>Card</legend>
+                <kwc-share-card id="share-card" title="Kevin86's Goes to the MOON" username="Kevin86" date="2017-05-23T10:48:21.053Z">
+                    <iron-image slot="cover" style="width: 100%; height: 192px;" src="https://hoc-staging.kano.me/assets/images/build_challenges/orbit_moon.svg"
+                        sizing="cover" preload fade>
+                    </iron-image>
+                    <div slot="title-icon" class="icon title-icon"></div>
+                    <kwc-share-action id="like" slot="actions" active><div slot="icon">${like}</div>Like</kwc-share-action>
+                    <kwc-share-action id="comment" slot="actions"><div slot="icon">${comment}</div>Comment</kwc-share-action>
+                    <kwc-share-action id="custom" slot="actions"><div slot="icon">${remix}</div>Remix</kwc-share-action>
+                </kwc-share-card>
+            </fieldset>
+        `;
+
+        document.body.appendChild(tpl.content.cloneNode(true));
 
         document.addEventListener('DOMContentLoaded', () => {
             const avatar = {
